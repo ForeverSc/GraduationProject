@@ -1,0 +1,61 @@
+const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
+const SALT_WORK_FACTOR = 3;
+
+const userSchema = new mongoose.Schema({
+    userId: {
+        type: String,
+        unique: true
+    },
+    username: {
+        type: String,
+        unique: true,
+        required: true //非空验证
+    },
+    password: {
+        type: String,
+        unique: true,
+        required: true
+    }
+});
+
+userSchema.pre('save', function (next) {
+    let user = this;
+    //加密
+    bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
+        if (err) return next(err);
+        bcrypt.hash(user.password, salt, function(err, hash) {
+            if (err) return next(err);
+            user.password = hash;
+            next();
+        })
+    });
+});
+
+userSchema.methods= {
+    updatePassword(password, cb){
+        var user = this;
+
+        bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
+            if (err) return cb(err);
+            bcrypt.hash(password, salt, function(err, hash) {
+                if (err) return cb(err);
+                user.password = hash;
+                cb(null);
+            });
+        });
+    },
+    checkPassword(password, cb){
+        bcrypt.compare(password, this.password, function (err, isMatch) {
+            if(err) return cb(err)
+            cb(null, isMatch)
+        })
+    }
+};
+
+
+
+
+
+module.exports = userSchema;
+
