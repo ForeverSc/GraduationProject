@@ -3,10 +3,6 @@ const bcrypt = require('bcryptjs');
 const SALT_WORK_FACTOR = 3;
 
 const userSchema = new mongoose.Schema({
-    userId: {
-        type: String,
-        unique: true
-    },
     username: {
         type: String,
         unique: true,
@@ -21,6 +17,7 @@ const userSchema = new mongoose.Schema({
 
 userSchema.pre('save', function (next) {
     let user = this;
+
     //加密
     bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
         if (err) return next(err);
@@ -34,8 +31,7 @@ userSchema.pre('save', function (next) {
 
 userSchema.methods= {
     updatePassword(password, cb){
-        var user = this;
-
+        let user = this;
         bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
             if (err) return cb(err);
             bcrypt.hash(password, salt, function(err, hash) {
@@ -53,9 +49,13 @@ userSchema.methods= {
     }
 };
 
-
-
-
+userSchema.statics = {
+    findOneByUsername(username, cb){
+        return this
+            .findOne({ username })
+            .exec(cb)
+    }
+};
 
 module.exports = userSchema;
 
