@@ -33,22 +33,94 @@
 ## APIS
 ### mobile（用户端）
 #### 注册接口
-url: 
+url: /users/register
 request:
 
 | 参数           | 类型          | 是否必要  | 说明   |
 | ------------- |:-------------:| -----:  | ----: |
-|       |  |  |
-|       |  |  |
-|       |  |  |
+| username      | String       |   是     |用户名  |
+| password      | String       |   是     |密码    |
 
 response:
 ```
 {
-    data: {},
-    result: 'success',
+    result: '注册成功',
+    errorCode: '000000'
+}
+```
+
+#### 登录接口
+url: /users/login
+request:
+
+| 参数           | 类型          | 是否必要  | 说明   |
+| ------------- |:-------------:| -----:  | ----: |
+| username      | String       |   是     |用户名  |
+| password      | String       |   是     |密码    |
+
+response:
+```
+{
+    result: '登录成功！',
+    errorCode: '000000'
+}
+```
+
+#### 登出接口
+url: /users/logout
+request: {}
+response: 
+```
+{
+    result: '登出成功！',
     errorCode: '000000'
 }
 ```
 
 ### pc （客户端）
+#### 注册接口
+url: /shops/register
+request:
+
+| 参数           | 类型          | 是否必要  | 说明   |
+| ------------- |:-------------:| -----:  | ----: |
+| shopName      | String       |   是     |店铺名  |
+| shopTel       | String       |   是     |店铺电话 |
+| shopAddr      | String       |   是     |店铺地址 |
+| password      | String       |   是     |密码    |
+
+response:
+```
+{
+    result: '注册成功',
+    errorCode: '000000'
+}
+```
+
+#### 登录接口
+url: /shops/login
+request:
+
+| 参数           | 类型          | 是否必要  | 说明   |
+| ------------- |:-------------:| -----:  | ----: |
+| username      | String       |   是     |用户名  |
+| password      | String       |   是     |密码    |
+
+response:
+```
+{
+    result: '登录成功！',
+    errorCode: '000000'
+}
+```
+
+#### 登出接口
+url: /shops/logout
+request: {}
+response: 
+```
+{
+    result: '登出成功！',
+    errorCode: '000000'
+}
+```

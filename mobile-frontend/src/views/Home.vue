@@ -1,25 +1,25 @@
 <template>
   <div>
-    <mt-header fixed title="首页"></mt-header>
-    <mt-tab-container v-model="active">
-      <mt-tab-container-item id="tab-container1">
-        <mt-cell v-for="n in 10" title="tab-container 1"></mt-cell>
+    <mt-header fixed :title="title"></mt-header>
+    <mt-tab-container v-model="active" :swipeable="true">
+      <mt-tab-container-item id="tab-takeout" >
+
       </mt-tab-container-item>
-      <mt-tab-container-item id="tab-container2">
-        <mt-cell v-for="n in 5" title="tab-container 2"></mt-cell>
+      <mt-tab-container-item id="tab-orders">
+
       </mt-tab-container-item>
-      <mt-tab-container-item id="tab-container3">
-        <mt-cell v-for="n in 7" title="tab-container 3"></mt-cell>
+      <mt-tab-container-item id="tab-user">
+
       </mt-tab-container-item>
     </mt-tab-container>
     <mt-tabbar v-model="active">
-      <mt-tab-item id="tab-container1">
+      <mt-tab-item id="tab-takeout">
         外卖
       </mt-tab-item>
-      <mt-tab-item id="tab-container2">
+      <mt-tab-item id="tab-orders">
         订单
       </mt-tab-item>
-      <mt-tab-item id="tab-container3">
+      <mt-tab-item id="tab-user">
         我的
       </mt-tab-item>
     </mt-tabbar>
@@ -30,7 +30,17 @@
       name: 'Home',
       data(){
           return {
-            active: 'tab-container1'
+            active: 'tab-takeout'
+          }
+      },
+      computed: {
+          title(){
+              switch(this.active){
+                case 'tab-takeout': return '外卖'; break;
+                case 'tab-orders': return '订单'; break;
+                case 'tab-user': return '我的';  break;
+                default: return ''; break;
+              }
           }
       }
   }
