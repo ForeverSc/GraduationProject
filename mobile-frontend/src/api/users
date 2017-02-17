@@ -1,0 +1,13 @@
+import { httpService } from '../util/axios'
+
+export default {
+  register(data){
+    return httpService.post('/users/register', data || {})
+  },
+  login(data){
+    return httpService.post('/users/login', data || {})
+  },
+  logout(data){
+    return httpService.post('/users/logout', data || {})
+  }
+}

@@ -9,7 +9,7 @@ export default new VueRouter({
   base: '/',
   routes: [
     {
-      path: '/',
+      path: '/login',
       component: Login
     },
     {
@@ -17,8 +17,12 @@ export default new VueRouter({
       component: Register
     },
     {
+      path: '/home',
+      component: Home
+    },
+    {
       path: '*',
-      redirect: '/'
+      redirect: '/login'
     }
   ]
 })

@@ -4,19 +4,28 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const session = require('express-session');
 
 const index = require('./routes/index');
 const users = require('./routes/users');
 
 const app = express();
+const cors = require('cors');//TODO:跨域操作，上线后删除
 
 //db
+const DB_URL = 'mongodb://localhost/gp';
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/gp');
+const mongoStore = require('connect-mongo')(session);
+
+mongoose.connect(DB_URL);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+
+
+//TODO:跨域操作，上线后删除
+app.use(cors());
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -25,6 +34,27 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+    secret: 'gp',
+    resave: false,
+    saveUninitialized: true,
+    store: new mongoStore({
+        url: DB_URL,
+        collection: 'sessions'
+    })
+}));
+
+//判定session中是否存在用户
+app.use((req, res, next) => {
+   let _user = req.session.user;
+
+   if(_user){
+       app.locals.user = _user;
+   }else{
+       delete app.locals.user;
+   }
+   next();
+});
 
 app.use('/', index);
 app.use('/users', users);
@@ -44,7 +74,10 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.send({
+      errCode: '100000',
+      result: 'error'
+  });
 });
 
 module.exports = app;

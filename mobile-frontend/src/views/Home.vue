@@ -1,6 +1,6 @@
 <template>
   <div>
-    <mt-header fixed title="固定在顶部"></mt-header>
+    <mt-header fixed title="首页"></mt-header>
     <mt-tab-container v-model="active">
       <mt-tab-container-item id="tab-container1">
         <mt-cell v-for="n in 10" title="tab-container 1"></mt-cell>

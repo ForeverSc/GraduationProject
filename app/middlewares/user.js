@@ -66,7 +66,7 @@ exports.login = function (req, res) {
             });
         }
 
-        user.checkPassword(dbUser.password, (err, isMatch) => {
+        dbUser.checkPassword(user.password, (err, isMatch) => {
             if(err){
                 return res.send({
                     errCode: '000100',

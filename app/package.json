@@ -6,14 +6,18 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "bcryptjs": "2.3.0",
     "body-parser": "~1.16.0",
+    "connect-mongo": "^0.8.2",
     "cookie-parser": "~1.4.3",
+    "cors": "^2.8.1",
     "debug": "~2.6.0",
     "express": "~4.14.1",
+    "express-session": "^1.12.1",
     "jade": "~1.11.0",
-    "morgan": "~1.7.0",
-    "serve-favicon": "~2.3.2",
+    "kerberos": "0.0.17",
     "mongoose": "^4.2.5",
-    "bcryptjs": "2.3.0"
+    "morgan": "~1.7.0",
+    "serve-favicon": "~2.3.2"
   }
 }
