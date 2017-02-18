@@ -21,7 +21,7 @@
 - 管理员功能
 
 ## 项目架构
-前端：Vue2.0
+前端：Vue2.0 + Vue-Router + Vuex + Axios
 
 后端：Node.js(Express4) + MongoDB
 
