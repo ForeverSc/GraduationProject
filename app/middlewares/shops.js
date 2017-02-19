@@ -4,8 +4,8 @@ const Shop = mongoose.model('shop', ShopSchema);
 /**
  * errCode
  * 000100: 数据库错误
- * 000001: 用户已经存在
- * 000010: 用户不存在
+ * 000001: 店铺已经存在
+ * 000010: 店铺不存在
  * 000011: 密码错误
  **/
 exports.register = function (req, res) {
@@ -99,3 +99,149 @@ exports.logout = function (req, res) {
         result: '登出成功！'
     });
 };
+
+//获取店铺信息
+exports.getShopInfo = function (req, res) {
+    let shop = new Shop();
+    shop.shopName = req.body.shopName;
+
+    Shop.findOneByShopName(shop.shopName, function (err, dbShop) {
+        if(err){
+            return res.send({
+                errCode: '000100',
+                result: err
+            });
+        }
+
+        if(!dbShop){
+            return res.send({
+                errCode: '000010',
+                result: '店铺不存在'
+            })
+        }
+
+        let data = {
+            shopName: dbShop.shopName,
+            shopTel: dbShop.shopTel,
+            shopAddr: dbShop.shopAddr,
+            shopDetail: dbShop.shopDetail,
+            shopLogo: dbShop.shopLogo
+        };
+
+        return res.send({
+            data,
+            errCode: '000000',
+            result: 'success'
+        });
+
+    });
+};
+
+//更新店铺信息
+exports.updateShopInfo = function (req, res) {
+    let shop = new Shop();
+    shop.shopName = req.body.shopName;
+    shop.shopTel = req.body.shopTel;
+    shop.shopAddr = req.body.shopAddr;
+    shop.shopDetail = req.body.shopDetail;
+
+    Shop.findOneByShopName(shop.shopName, function (err, dbShop) {
+        if(err){
+            return res.send({
+                errCode: '000100',
+                result: err
+            });
+        }
+
+        if(!dbShop){
+            return res.send({
+                errCode: '000010',
+                result: '店铺不存在！'
+           });
+        }
+
+        dbShop.shopTel = shop.shopTel;
+        dbShop.shopAddr = shop.shopAddr;
+        dbShop.shopDetail = shop.shopDetail;
+
+        dbShop.save().then(shop => {
+            res.send({
+                errCode: '000000',
+                result: shop.shopName + '更新成功！'
+            });
+        }, err => {
+           res.send({
+               errCode: '000100',
+               result: err
+           })
+        });
+    });
+};
+
+//更新店铺菜单
+exports.updateShopMenu = function (req, res) {
+    let shop = new Shop();
+    shop.shopName = req.body.shopName;
+    shop.shopMenu = req.body.shopMenu;
+
+    Shop.findOneByShopName(shop.shopName, function (err, dbShop) {
+        if(err){
+            return res.send({
+                errCode: '000100',
+                result: err
+            });
+        }
+
+        if(!dbShop){
+            return res.send({
+                errCode: '000010',
+                result: '店铺不存在！'
+            });
+        }
+
+        dbShop.shopMenu = shop.shopMenu;
+        dbShop.save().then(shop => {
+            return res.send({
+                errCode: '000000',
+                result: shop.shopName + '菜单更新成功！'
+            });
+        }, err => {
+            return res.send({
+                errCode: '000100',
+                result: err
+            })
+        });
+    });
+};
+
+//获取店铺菜单
+exports.getShopMenu = function (req, res) {
+    let shop = new Shop();
+    shop.shopName = req.body.shopName;
+
+    Shop.findOneByShopName(shop.shopName , function (err, dbShop) {
+        if(err){
+            return res.send({
+                errCode: '000100',
+                result: err
+            });
+        }
+
+        if(!dbShop){
+            return res.send({
+                errCode: '000010',
+                result: '店铺不存在！'
+            });
+        }
+
+        return res.send({
+            data: dbShop.shopMenu,
+            errCode: '000000',
+            result: '菜单查询成功！'
+        });
+
+    });
+
+};
+
+

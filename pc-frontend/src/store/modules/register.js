@@ -1,4 +1,4 @@
-import users from '../../api/users'
+import shops from '../../api/shops'
 import * as types from '../mutations-types'
 import validator from '../../util/validator'
 import router from '../../router'
@@ -32,14 +32,14 @@ const actions = {
     }
     let loading = Loading.service()
     delete data.rePassword
-    users.register(data)
+    shops.register(data)
          .then(response => {
            loading.close()
-           let data = response.data
+           let res = response.data
            if(data.errCode === '000000'){
              commit(types.REGISTER_SUCCESS)
            }else{
-             commit(types.REGISTER_FAIL, { errMsg: data.result })
+             commit(types.REGISTER_FAIL, { errMsg: res.result })
            }
          })
         .catch(err => {

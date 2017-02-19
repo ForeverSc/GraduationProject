@@ -1,4 +1,4 @@
-import users from '../../api/users'
+import shops from '../../api/shops'
 import * as types from '../mutations-types'
 import validator from '../../util/validator'
 import router from '../../router'
@@ -26,14 +26,14 @@ const actions = {
     }
     let loading = Loading.service()
     let shopName = data.shopName
-    users.login(data)
+    shops.login(data)
       .then(response => {
         loading.close()
-        let data = response.data
-        if(data.errCode === '000000'){
+        let res = response.data
+        if(res.errCode === '000000'){
           commit(types.LOGIN_SUCCESS, { shopName })
         }else{
-          commit(types.LOGIN_FAIL, { errMsg: data.result })
+          commit(types.LOGIN_FAIL, { errMsg: res.result })
         }
       })
       .catch(err => {

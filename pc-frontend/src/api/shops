@@ -1,0 +1,25 @@
+import { httpService } from '../util/axios'
+
+export default {
+  register(data){
+    return httpService.post('/shops/register', data || {})
+  },
+  login(data){
+    return httpService.post('/shops/login', data || {})
+  },
+  logout(data){
+    return httpService.post('/shops/logout', data || {})
+  },
+  getShopInfo(data){
+    return httpService.post('/shops/getShopInfo', data || {})
+  },
+  updateShopInfo(data){//更新店铺信息
+    return httpService.post('/shops/updateShopInfo', data || {})
+  },
+  updateShopMenu(data){//更新店铺菜单
+    return httpService.post('/shops/updateShopMenu', data || {})
+  },
+  getShopMenu(data){
+    return httpService.post('/shops/getShopMenu', data || {})
+  }
+}

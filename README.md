@@ -33,7 +33,7 @@
 ## APIS
 ### mobile（用户端）
 #### 注册接口
-url: /users/register
+url: /shops/register
 request:
 
 | 参数           | 类型          | 是否必要  | 说明   |
@@ -50,7 +50,7 @@ response:
 ```
 
 #### 登录接口
-url: /users/login
+url: /shops/login
 request:
 
 | 参数           | 类型          | 是否必要  | 说明   |
@@ -67,7 +67,7 @@ response:
 ```
 
 #### 登出接口
-url: /users/logout
+url: /shops/logout
 request: {}
 response: 
 ```
@@ -124,3 +124,58 @@ response:
     errorCode: '000000'
 }
 ```
+
+####更新店铺信息接口
+url: /shops/updateShopInfo
+request: 
+
+| 参数           | 类型          | 是否必要  | 说明   |
+| ------------- |:-------------:| -----:  | ----: |
+| shopName      | String       |   是     |店铺名   |
+| shopTel       | String       |   是     |店铺电话 |
+| shopAddr      | String       |   是     |店铺地址 |
+| shopDetail    | String       |   是     |店铺介绍 |
+
+response:
+```
+{
+    errCode: '000000'
+    result: '更新成功！'
+}
+```
+
+####更新店铺菜单接口
+url: /shops/updateShopMenu
+request: 
+| 参数           | 类型          | 是否必要  | 说明   |
+| ------------- |:-------------:| -----:  | ----: |
+| shopName      | String       |   是     |店铺名   |
+| shopMenu       | String       |   是    |店铺菜单 |
+
+response:
+```
+{
+    errCode: '000000',
+    result: '更新成功！'
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

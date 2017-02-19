@@ -15,11 +15,11 @@ const actions = {
     shops.logout(data)
       .then(response => {
         Indicator.close()
-        let res = response.data
-        if(res.errCode === '000000'){
+        let data = response.data
+        if(data.errCode === '000000'){
           commit(types.LOGOUT_SUCCESS)
         }else{
-          commit(types.LOGOUT_FAIL, { errMsg: res.result })
+          commit(types.LOGOUT_FAIL, { errMsg: data.result })
         }
       })
       .catch(err => {

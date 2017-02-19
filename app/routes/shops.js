@@ -4,6 +4,10 @@ const shop = require('../middlewares/shops')
 
 Shop.post('/register', shop.register)
     .post('/login', shop.login)
-    .post('/logout', shop.logout);
+    .post('/logout', shop.logout)
+    .post('/getShopInfo', shop.getShopInfo)
+    .post('/updateShopInfo', shop.updateShopInfo)
+    .post('/updateShopMenu', shop.updateShopMenu)
+    .post('/getShopMenu', shop.getShopMenu);
 
 module.exports = Shop;

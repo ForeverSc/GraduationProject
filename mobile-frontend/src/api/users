@@ -2,12 +2,12 @@ import { httpService } from '../util/axios'
 
 export default {
   register(data){
-    return httpService.post('/users/register', data || {})
+    return httpService.post('/shops/register', data || {})
   },
   login(data){
-    return httpService.post('/users/login', data || {})
+    return httpService.post('/shops/login', data || {})
   },
   logout(data){
-    return httpService.post('/users/logout', data || {})
+    return httpService.post('/shops/logout', data || {})
   }
 }
