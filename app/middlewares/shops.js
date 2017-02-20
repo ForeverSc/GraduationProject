@@ -23,7 +23,7 @@ exports.register = function (req, res) {
             })
         }
         //用户已经存在
-        if(dbShop){
+        if (dbShop) {
             let result = '商家：' + shop.shopName + '已存在';
             console.log(result);
             return res.send({
@@ -32,16 +32,25 @@ exports.register = function (req, res) {
             });
         }
 
-        shop.save().then(shop => {
-            return res.send({
-                errCode: '000000',
-                result: shop.shopName + '注册成功！'
-            });
-        }, err => {
-            console.log(err);
-            return res.send({
-                errCode: '000100',
-                result: err
+        shop.updatePassword(shop.password, function (err) {
+            if (err) {
+                return res.send({
+                    errCode: '000000',
+                    result: err
+                });
+            }
+
+            shop.save().then(shop => {
+                return res.send({
+                    errCode: '000000',
+                    result: shop.shopName + '注册成功！'
+                });
+            }, err => {
+                console.log(err);
+                return res.send({
+                    errCode: '000100',
+                    result: err
+                });
             });
         });
     });
@@ -53,7 +62,7 @@ exports.login = function (req, res) {
     shop.password = req.body.password;
 
     Shop.findOneByShopName(shop.shopName, function (err, dbShop) {
-        if(err){
+        if (err) {
             return res.send({
                 errCode: '000100',
                 result: err
@@ -61,7 +70,7 @@ exports.login = function (req, res) {
         }
 
         //用户不存在
-        if(!dbShop){
+        if (!dbShop) {
             return res.send({
                 errCode: '000010',
                 result: '用户不存在！'
@@ -69,14 +78,14 @@ exports.login = function (req, res) {
         }
 
         dbShop.checkPassword(shop.password, (err, isMatch) => {
-            if(err){
+            if (err) {
                 return res.send({
                     errCode: '000100',
                     result: err
                 });
             }
 
-            if(!isMatch){
+            if (!isMatch) {
                 return res.send({
                     errCode: '000011',
                     result: '用户名或密码错误！'
@@ -106,14 +115,14 @@ exports.getShopInfo = function (req, res) {
     shop.shopName = req.body.shopName;
 
     Shop.findOneByShopName(shop.shopName, function (err, dbShop) {
-        if(err){
+        if (err) {
             return res.send({
                 errCode: '000100',
                 result: err
             });
         }
 
-        if(!dbShop){
+        if (!dbShop) {
             return res.send({
                 errCode: '000010',
                 result: '店铺不存在'
@@ -146,18 +155,18 @@ exports.updateShopInfo = function (req, res) {
     shop.shopDetail = req.body.shopDetail;
 
     Shop.findOneByShopName(shop.shopName, function (err, dbShop) {
-        if(err){
+        if (err) {
             return res.send({
                 errCode: '000100',
                 result: err
             });
         }
 
-        if(!dbShop){
+        if (!dbShop) {
             return res.send({
                 errCode: '000010',
                 result: '店铺不存在！'
-           });
+            });
         }
 
         dbShop.shopTel = shop.shopTel;
@@ -170,10 +179,10 @@ exports.updateShopInfo = function (req, res) {
                 result: shop.shopName + '更新成功！'
             });
         }, err => {
-           res.send({
-               errCode: '000100',
-               result: err
-           })
+            res.send({
+                errCode: '000100',
+                result: err
+            })
         });
     });
 };
@@ -185,14 +194,14 @@ exports.updateShopMenu = function (req, res) {
     shop.shopMenu = req.body.shopMenu;
 
     Shop.findOneByShopName(shop.shopName, function (err, dbShop) {
-        if(err){
+        if (err) {
             return res.send({
                 errCode: '000100',
                 result: err
             });
         }
 
-        if(!dbShop){
+        if (!dbShop) {
             return res.send({
                 errCode: '000010',
                 result: '店铺不存在！'
@@ -219,15 +228,15 @@ exports.getShopMenu = function (req, res) {
     let shop = new Shop();
     shop.shopName = req.body.shopName;
 
-    Shop.findOneByShopName(shop.shopName , function (err, dbShop) {
-        if(err){
+    Shop.findOneByShopName(shop.shopName, function (err, dbShop) {
+        if (err) {
             return res.send({
                 errCode: '000100',
                 result: err
             });
         }
 
-        if(!dbShop){
+        if (!dbShop) {
             return res.send({
                 errCode: '000010',
                 result: '店铺不存在！'

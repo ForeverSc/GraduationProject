@@ -61,7 +61,10 @@ const mutations = {
     MessageBox.alert(errMsg)
   },
   [types.UPDATE_SHOP_INFO_SUCCESS](state){
-
+    Message({
+      message: '保存成功！',
+      type: 'success'
+    })
   },
   [types.UPDATE_SHOP_INFO_FAIL](state, { errMsg }){
     MessageBox.alert(errMsg)

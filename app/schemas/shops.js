@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
-const SALT_WORK_FACTOR = 3;
+const SALT_WORK_FACTOR = 10;
 
 const shopDish = new mongoose.Schema({
     dishName: {
@@ -35,20 +35,6 @@ const shopSchema = new mongoose.Schema({
         required: true
     },
     shopMenu: [ shopDish ]
-});
-
-shopSchema.pre('save', function (next) {
-    let shop = this;
-
-    //加密
-    bcrypt.genSalt(SALT_WORK_FACTOR, function (err, salt) {
-        if (err) return next(err);
-        bcrypt.hash(shop.password, salt, function (err, hash) {
-            if (err) return next(err);
-            shop.password = hash;
-            next();
-        })
-    });
 });
 
 shopSchema.methods = {

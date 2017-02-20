@@ -30,16 +30,25 @@ exports.register = function (req, res) {
             });
         }
 
-        user.save().then(user => {
-            return res.send({
-                errCode: '000000',
-                result: user.username + '注册成功！'
-            });
-        }, err => {
-            console.log(err);
-            return res.send({
-                errCode: '000100',
-                result: err
+        user.updatePassword(user.password, function (err) {
+            if (err) {
+                return res.send({
+                    errCode: '000000',
+                    result: err
+                });
+            }
+
+            user.save().then(user => {
+                return res.send({
+                    errCode: '000000',
+                    result: user.username + '注册成功！'
+                });
+            }, err => {
+                console.log(err);
+                return res.send({
+                    errCode: '000100',
+                    result: err
+                });
             });
         });
     });
