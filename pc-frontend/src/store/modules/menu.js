@@ -2,46 +2,70 @@ import shops from '../../api/shops'
 import * as types from '../mutations-types'
 import validator from '../../util/validator'
 import router from '../../router'
+import { MessageBox, Loading, Message } from 'element-ui'
 
 const state = {
+  shopMenu: []
 };
 
 const getters = {
+  dishTable: state => state.dishTable
 };
 
 const actions = {
-  logout({commit}, data){
-    Indicator.open()
-    shops.logout(data)
+  getShopMenu({commit}, data){
+    let loading = Loading.service()
+    shops.getShopMenu(data)
       .then(response => {
-        Indicator.close()
-        let data = response.data
-        if(data.errCode === '000000'){
-          commit(types.LOGOUT_SUCCESS)
+        loading.close()
+        let res = response.data
+        if(res.errCode === '000000'){
+          commit(types.GET_SHOP_MENU_SUCCESS, res.data)
         }else{
-          commit(types.LOGOUT_FAIL, { errMsg: data.result })
+          commit(types.GET_SHOP_MENU_FAIL, { errMsg: res.result })
         }
       })
       .catch(err => {
-        Indicator.close()
-        commit(types.LOGOUT_FAIL, { errMsg: err })
+        loading.close()
+        commit(types.GET_SHOP_MENU_FAIL, { errMsg: err })
+      })
+  },
+  updateShopMenu({commit}, data){
+    let loading = Loading.service()
+    shops.updateShopMenu(data)
+      .then(response => {
+        loading.close()
+        let res = response.data
+        if(res.errCode === '000000'){
+          commit(types.UPDATE_SHOP_MENU_SUCCESS)
+        }else{
+          commit(types.UPDATE_SHOP_MENU_FAIL, { errMsg: res.result })
+        }
+      })
+      .catch(err => {
+        loading.close()
+        commit(types.UPDATE_SHOP_MENU_FAIL, { errMsg: err })
       })
   }
 };
 
 const mutations = {
-  [types.LOGIN_SUCCESS](state, { username }){
-    Toast({
-      message: '登录成功！',
-      duration: 800
-    })
-    state.username = ''
-    state.loginStatus = false
-    router.push('/login')
+  [types.GET_SHOP_MENU_SUCCESS](state, data){
+    state.shopMenu = data
   },
-  [types.LOGIN_FAIL](state, { errMsg }){
+  [types.GET_SHOP_MENU_FAIL](state, { errMsg }){
+    MessageBox.alert(errMsg)
+  },
+  [types.UPDATE_SHOP_MENU_SUCCESS](state){
+    Message({
+      message: '菜单保存成功！',
+      type: 'success'
+    })
+  },
+  [types.UPDATE_SHOP_MENU_FAIL](state, { errMsg }){
     MessageBox.alert(errMsg)
   }
+
 };
 
 export default {

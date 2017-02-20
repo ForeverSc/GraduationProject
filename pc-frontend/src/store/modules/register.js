@@ -36,7 +36,7 @@ const actions = {
          .then(response => {
            loading.close()
            let res = response.data
-           if(data.errCode === '000000'){
+           if(res.errCode === '000000'){
              commit(types.REGISTER_SUCCESS)
            }else{
              commit(types.REGISTER_FAIL, { errMsg: res.result })

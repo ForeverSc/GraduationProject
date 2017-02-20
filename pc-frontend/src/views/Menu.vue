@@ -5,21 +5,21 @@
         <span style="line-height: 36px;">菜单管理</span>
       </div>
       <el-table
-        :data="tableData"
+        :data="shopMenu"
         border
         style="width: 100%">
         <el-table-column
           label="菜名"
           width="180">
           <template scope="scope">
-            {{ scope.row.name }}
+            {{ scope.row.dishName }}
           </template>
         </el-table-column>
         <el-table-column
           label="价格"
           width="180">
           <template scope="scope">
-            {{ scope.row.price }}
+            {{ scope.row.dishPrice }}
           </template>
         </el-table-column>
         <el-table-column label="操作">
@@ -37,9 +37,9 @@
         </el-table-column>
       </el-table>
       <div style="margin-top: 20px;">
-        <el-button type="primary">保存</el-button>
+        <el-button type="primary" @click="saveMenu">保存</el-button>
         <el-button type="success" @click="addNewDish">新增</el-button>
-        <el-button>取消</el-button>
+        <el-button @click="cancel">取消</el-button>
       </div>
     </el-card>
     <el-dialog :title="dialogTitle" v-model="dialogVisible">
@@ -53,75 +53,104 @@
         <el-form-item label="菜品介绍">
           <el-input type="textarea" v-model="dish.dishDetail"></el-input>
         </el-form-item>
-        <el-form-item label="菜品图标">
-          <el-upload
-            action="//jsonplaceholder.typicode.com/posts/"
-            :on-preview="handlePreview"
-            :on-remove="handleRemove"
-            :default-file-list="fileList">
-            <el-button size="small" type="primary">点击上传</el-button>
-            <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
-          </el-upload>
-        </el-form-item>
-      </el-form>
-      <span slot="footer" class="dialog-footer">
-          <el-button type="primary">保存</el-button>
+        <!--<el-form-item label="菜品图标">-->
+        <!--<el-upload-->
+        <!--action="//jsonplaceholder.typicode.com/posts/"-->
+        <!--:on-preview="handlePreview"-->
+        <!--:on-remove="handleRemove"-->
+        <!--:default-file-list="fileList">-->
+        <!--<el-button size="small" type="primary">点击上传</el-button>-->
+        <!--<div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>-->
+        <!--</el-upload>-->
+        <!--</el-form-item>-->
+        </el-form>
+        <span slot="footer" class="dialog-footer">
+          <el-button type="primary" @click="saveDish">保存</el-button>
           <el-button @click="closeDialog">取消</el-button>
       </span>
     </el-dialog>
   </div>
 </template>
 <script>
+  import { mapGetters } from 'vuex'
+  import Util from '../util/index'
   export default{
     name: 'ShopInfo',
     data() {
       return {
         dialogVisible: false,
         dialogTitle: '新增菜品',
+        dialogOperation: 'add',
         dish: {
+          index: '',
           dishName: '',
           dishPrice: '',
           dishDetail: ''
+        }
+      }
+    },
+    computed: {
+      shopMenu: {
+        get(){
+          return this.$store.state.menu.shopMenu
         },
-        tableData: [{
-          name: '热干面',
-          price: '100.00'
-        }, {
-          name: '热干面',
-          price: '100'
-        }, {
-          name: '热干面',
-          price: '100'
-        }]
+        set(value){
+          this.$store.state.menu.shopMenu = value
+        }
       }
     },
     methods: {
-      handleEdit(){
+      handleEdit(index, row){
         this.dialogVisible = true
         this.dialogTitle = '编辑菜品'
+        this.dialogOperation = 'edit'
+        this.dish = { ...Util.deepClone(this.shopMenu[index]), index}
       },
-      handleDelete(){
+      handleDelete(index, row){
         this.$confirm('是否确认删除该菜品？', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
+          this.shopMenu.splice(index, 1)
           this.$message({
             type: 'success',
             message: '删除成功！'
           });
-        }, () => {
-        })
+        }, () => {})
       },
       addNewDish(){
         Object.keys(this.dish).forEach(currentValue => {
           this.dish[currentValue] = ''
         });
         this.dialogVisible = true
+        this.dialogOperation = 'add'
+      },
+      saveDish(){
+        if(this.dialogOperation === 'add'){//新增菜品
+          let newDish  = Util.deepClone(this.dish)
+          this.shopMenu.push(newDish)
+        }else{//编辑菜品
+          let index = this.dish.index
+          this.shopMenu.splice(index, 1, Util.deepClone(this.dish))
+        }
+        this.dialogVisible = false
+      },
+      saveMenu(){
+        this.$store.dispatch('updateShopMenu', {
+          shopName: this.$store.state.login.shopName,
+          shopMenu: this.shopMenu
+        })
       },
       closeDialog(){
         this.dialogVisible = false
+      },
+      cancel(){
+        this.$router.go(-1)
       }
+    },
+    mounted(){
+      this.$store.dispatch('getShopMenu', {shopName: this.$store.state.login.shopName})
     }
   }
 </script>
