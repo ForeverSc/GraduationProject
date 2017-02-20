@@ -62,6 +62,11 @@ shopSchema.statics = {
         return this
             .findOne({shopName})
             .exec(cb)
+    },
+    findAllShops(cb){
+        return this
+            .find({})
+            .exec(cb)
     }
 };
 

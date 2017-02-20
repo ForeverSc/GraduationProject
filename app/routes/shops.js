@@ -8,6 +8,7 @@ Shop.post('/register', shop.register)
     .post('/getShopInfo', shop.getShopInfo)
     .post('/updateShopInfo', shop.updateShopInfo)
     .post('/updateShopMenu', shop.updateShopMenu)
-    .post('/getShopMenu', shop.getShopMenu);
+    .post('/getShopMenu', shop.getShopMenu)
+    .post('/getShopList', shop.getShopList);
 
 module.exports = Shop;

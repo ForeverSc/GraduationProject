@@ -253,4 +253,33 @@ exports.getShopMenu = function (req, res) {
 
 };
 
+//获取店铺列表
+exports.getShopList = function (req, res) {
+    Shop.findAllShops(function (err, dbShops) {
+        if (err) {
+            return res.send({
+                errCode: '0001000',
+                result: err
+            });
+        }
+
+        let shopList = [];
+
+        dbShops.forEach(function (value, index, array) {
+            let shop = {
+                shopName: value.shopName,
+                shopAddr: value.shopAddr,
+                shopTel: value.shopTel,
+                shopDetail: value.shopDetail
+            };
+           shopList.push(shop);
+        });
+
+        return res.send({
+            data: shopList,
+            errCode: '000000',
+            result: 'success'
+        });
+    })
+};
 
