@@ -5,6 +5,7 @@ import mutations from './mutations'
 //modules
 import register from './modules/register'
 import login from './modules/login'
+import shopList from './modules/shopList'
 
 
 Vue.use(Vuex);
@@ -12,7 +13,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   modules:{
     register,
-    login
+    login,
+    shopList
   },
   actions,
   mutations

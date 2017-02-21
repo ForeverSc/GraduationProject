@@ -1,8 +1,9 @@
 <template>
   <div>
     <mt-header fixed :title="title"></mt-header>
-    <mt-tab-container v-model="active" :swipeable="true">
-      <mt-tab-container-item id="tab-takeout" >
+    <mt-tab-container v-model="active" :swipeable="true" style="margin-top:40px;">
+      <mt-tab-container-item id="tab-takeout">
+        <shop-list></shop-list>
 
       </mt-tab-container-item>
       <mt-tab-container-item id="tab-orders">
@@ -12,7 +13,7 @@
 
       </mt-tab-container-item>
     </mt-tab-container>
-    <mt-tabbar v-model="active">
+    <mt-tabbar style="position: fixed;" v-model="active">
       <mt-tab-item id="tab-takeout">
         外卖
       </mt-tab-item>
@@ -26,8 +27,13 @@
   </div>
 </template>
 <script>
+  import ShopList from './ShopList'
+
   export default {
       name: 'Home',
+      components: {
+        ShopList
+      },
       data(){
           return {
             active: 'tab-takeout'

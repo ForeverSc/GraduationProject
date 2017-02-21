@@ -147,11 +147,11 @@ response:
 ####更新店铺菜单接口
 url: /shops/updateShopMenu
 request:   
+
 | 参数           | 类型          | 是否必要  | 说明   |
 | ------------- |:-------------:| -----:  | ----: |
 | shopName      | String       |   是     |店铺名   |
-| shopMenu      | String      |   是      |店铺菜单 |
-
+| shopMenu      | String       |   是     |店铺菜单 |
 
 response:
 ```
@@ -161,7 +161,24 @@ response:
 }
 ```
 
-
+####店铺列表接口
+url: /shops/getShopList
+requeset: null
+response:
+```
+{
+    data: [
+        {
+            shopName: '',
+            shopTel: '',
+            shopAddr: '',
+            shopDetail
+        }
+    ]
+    errCode: '000000',
+    result: 'success'
+}
+```
 
 
 

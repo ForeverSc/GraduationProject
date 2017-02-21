@@ -1,12 +1,8 @@
 <template>
-  
-
-
-
+  <div>shopMenu</div>
 </template>
 <script>
   export default {
-      name: 'take-out',
-
+      name: 'ShopMenu'
   }
 </script>
