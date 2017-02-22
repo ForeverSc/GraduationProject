@@ -1,7 +1,7 @@
 <template>
     <div class="cart">
       <div class="total">总共 {{ total }} 元</div>
-      <div class="clear">结算</div>
+       <div class="clear" @click="handleClear">结算</div>
     </div>
 </template>
 <script>

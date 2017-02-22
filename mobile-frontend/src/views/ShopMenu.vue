@@ -18,7 +18,7 @@
                    :dish="dish"
                    :index="index">
         </dish-cell>
-        <cart :total="1" @clear-click="clearClick"></cart>
+        <cart :total="total" @clear-click="clearClick"></cart>
 
       </mt-tab-container-item>
       <mt-tab-container-item id="2">
@@ -47,17 +47,13 @@
         selected: "1"
       }
     },
-    computed: {
-      ...mapGetters([
-        'shopMenu'
-      ]),
-      total(){
-
-      }
-    },
-    methods:{
+    computed: mapGetters([
+      'shopMenu',
+      'total'
+    ]),
+    methods: {
       clearClick(){
-
+        this.$store.dispatch('clearMenu')
       }
     },
     mounted(){
