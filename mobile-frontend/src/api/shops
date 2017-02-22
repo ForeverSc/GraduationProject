@@ -3,5 +3,8 @@ import { httpService } from '../util/axios'
 export default {
   getShopList(data){
     return httpService.post('/shops/getShopList', data || {})
+  },
+  getShopMenu(data){
+    return httpService.post('/shops/getShopMenu', data || {})
   }
 }

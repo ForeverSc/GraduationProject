@@ -9,3 +9,9 @@ export const LOGOUT_FAIL = 'LOGOUT_FAIL'
 /*****shop List*****/
 export const GET_SHOP_LIST_SUCCESS = 'GET_SHOP_LIST_SUCCESS'
 export const GET_SHOP_LIST_FAIL = 'GET_SHOP_LIST_FAIL'
+
+/******shop menu************/
+export const GET_SHOP_MENU_SUCCESS = 'GET_SHOP_MENU_SUCCESS'
+export const GET_SHOP_MENU_FAIL = 'GET_SHOP_MENU_FAIL'
+export const ADD_SHOP_DISH_NUM_SUCCESS = 'ADD_SHOP_DISH_NUM_SUCCESS'
+export const SUB_SHOP_DISH_NUM_SUCCESS = 'SUB_SHOP_DISH_NUM_SUCCESS'

@@ -76,6 +76,52 @@ response:
     errorCode: '000000'
 }
 ```
+####店铺列表接口
+url: /shops/getShopList
+requeset: null
+response:
+```
+{
+    data: [
+        {
+            shopName: '',
+            shopTel: '',
+            shopAddr: '',
+            shopDetail
+        }
+    ]
+    errCode: '000000',
+    result: 'success'
+}
+```
+
+####获取店铺菜单接口
+url: /shops/getShopMenu
+requeset:
+
+| 参数           | 类型          | 是否必要  | 说明   |
+| ------------- |:-------------:| -----:  | ----: |
+| shopName      | String       |   是     |店铺名  |
+
+response:
+```
+{
+  "data": [
+    {
+      "dishName": "热干面",
+      "dishPrice": "3.5",
+      "dishDetail": "好吃不贵",
+      "_id": "58a94cb8a7eb6f2a1c1841de"
+    }
+  ],
+  "errCode": "000000",
+  "result": "菜单查询成功！"
+}
+```
+
+
+
+
 
 ### pc （客户端）
 #### 注册接口
@@ -161,24 +207,6 @@ response:
 }
 ```
 
-####店铺列表接口
-url: /shops/getShopList
-requeset: null
-response:
-```
-{
-    data: [
-        {
-            shopName: '',
-            shopTel: '',
-            shopAddr: '',
-            shopDetail
-        }
-    ]
-    errCode: '000000',
-    result: 'success'
-}
-```
 
 
 
