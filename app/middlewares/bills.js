@@ -23,6 +23,31 @@ exports.order = function (req, res) {
             result: err
         });
     });
+};
+
+//用户查询订单接口
+exports.getOrderListByUsername = function (req, res) {
+    let username = req.body.username
+
+    Bill.findAllBillsByUsername(username, function (err, dbBills) {
+        if(err){
+            return res.send({
+                errCode: '000100',
+                result: err
+            });
+        }
+
+        return res.send({
+            data: dbBills,
+            errCode: '000000',
+            result: '订单查询成功！'
+        });
+    });
+};
+
+
+//店家查询订单接口
+exports.getOrderListByShopName = function (req, res) {
 
 
 };

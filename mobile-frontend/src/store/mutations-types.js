@@ -19,3 +19,6 @@ export const SUB_SHOP_DISH_NUM_SUCCESS = 'SUB_SHOP_DISH_NUM_SUCCESS'
 /*****bills*******************/
 export const ORDER_SUCCESS = 'ORDER_SUCCESS'
 export const ORDER_FAIL = 'ORDER_FAIL'
+export const GET_ORDER_LIST_SUCCESS = 'GET_ORDER_LIST_SUCCESS'
+export const GET_ORDER_LIST_FAIL = 'GET_ORDER_LIST_FAIL'
+

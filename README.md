@@ -119,7 +119,60 @@ response:
 }
 ```
 
+#### 用户下单接口
+url: /bills/order
+requeset:
 
+| 参数           | 类型          | 是否必要  | 说明   |
+| ------------- |:-------------:| -----:  | ----: |
+| shopName      | String       |   是     |店铺名  |
+| username      | String       |   是     |用户名  |
+| dishs         | Array        |   是     |点菜单  |
+| total         | String       |   是     |订单总价 |
+
+response:
+```
+{
+  "errCode": "000000",
+  "result": "下单成功！"
+}
+```
+
+#### 用户查询订单接口
+
+url: /bills/getOrderList
+requeset:
+
+| 参数           | 类型          | 是否必要  | 说明   |
+| ------------- |:-------------:| -----:  | ----: |
+| username      | String       |   是     |用户名  |
+
+response:
+```    
+{
+  {
+  "data": [
+    {
+      "_id": "58ae4def44f1171e8cb174b4",
+      "total": "2000",
+      "shopName": "fsshop",
+      "username": "s",
+      "__v": 0,
+      "dishs": [
+        {
+          "dishName": "热干面",
+          "dishPrice": "1000",
+          "dishNum": "2",
+          "_id": "58ae4def44f1171e8cb174b5"
+        }
+      ]
+    }
+  ],
+  "errCode": "000000",
+  "result": "订单查询成功！"
+}
+}
+```
 
 
 

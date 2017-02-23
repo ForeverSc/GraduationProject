@@ -4,13 +4,12 @@
     <mt-tab-container v-model="active" :swipeable="true" style="margin-top:40px;">
       <mt-tab-container-item id="tab-takeout">
         <shop-list></shop-list>
-
       </mt-tab-container-item>
       <mt-tab-container-item id="tab-orders">
-
+        <order-list></order-list>
       </mt-tab-container-item>
       <mt-tab-container-item id="tab-user">
-
+        <user-info></user-info>
       </mt-tab-container-item>
     </mt-tab-container>
     <mt-tabbar style="position: fixed;" v-model="active">
@@ -28,11 +27,15 @@
 </template>
 <script>
   import ShopList from './ShopList'
+  import OrderList from './OrderList'
+  import UserInfo from './UserInfo'
 
   export default {
       name: 'Home',
       components: {
-        ShopList
+        ShopList,
+        OrderList,
+        UserInfo
       },
       data(){
           return {
