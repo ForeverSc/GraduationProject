@@ -4,6 +4,7 @@ const bills = require('../middlewares/bills');
 
 Bills.post('/order', bills.order)
      .post('/getOrderListByUsername', bills.getOrderListByUsername)
-     .post('/getOrderListByShopName', bills.getOrderListByShopName);
+     .post('/getOrderListByShopName', bills.getOrderListByShopName)
+     .post('/getOrderInfoById', bills.getOrderInfoById);
 
 module.exports = Bills;

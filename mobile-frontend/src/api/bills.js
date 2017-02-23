@@ -6,5 +6,8 @@ export default {
   },
   getOrderListByUsername(data){
     return httpService.post('/bills/getOrderListByUsername', data || {})
+  },
+  getOrderInfoById(data){
+    return httpService.post('/bills/getOrderInfoById', data || {})
   }
 }

@@ -3,7 +3,7 @@
     <cell v-for="order in orderList"
           :title="order.shopName"
           :content="'总共'+ order.total + '￥'"
-          @cell-click="goOrderInfo">
+          @cell-click="goOrderInfo(order._id)">
     </cell>
   </div>
 </template>
@@ -20,8 +20,8 @@
       Cell
     },
     methods: {
-      goOrderInfo(){
-        this.$router.go('/orderInfo')
+      goOrderInfo(orderId){
+        this.$router.push({path: '/orderInfo', query: { orderId}})
       }
     },
     mounted(){

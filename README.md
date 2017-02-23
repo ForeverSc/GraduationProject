@@ -161,11 +161,37 @@ response:
       "dishs": [
         {
           "dishName": "热干面",
-          "dishPrice": "1000",
+          "dishPrice": "3.5",
           "dishNum": "2",
           "_id": "58ae4def44f1171e8cb174b5"
         }
       ]
+    }
+  ],
+  "errCode": "000000",
+  "result": "订单查询成功！"
+}
+}
+```
+
+#### 订单详情查询接口
+url: /bills/getOrderInfoById
+requeset:
+
+| 参数           | 类型          | 是否必要  | 说明   |
+| ------------- |:-------------:| -----:  | ----: |
+| orderId       | String       |   是     |订单ID  |
+
+response:
+```    
+{
+  {
+  "data": [
+    {
+      "orderId": "58ae4def44f1171e8cb174b4",
+      "total": "2000",
+      "shopName": "fsshop",
+      "state": "waiting"
     }
   ],
   "errCode": "000000",
