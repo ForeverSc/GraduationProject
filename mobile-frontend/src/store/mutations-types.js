@@ -15,3 +15,7 @@ export const GET_SHOP_MENU_SUCCESS = 'GET_SHOP_MENU_SUCCESS'
 export const GET_SHOP_MENU_FAIL = 'GET_SHOP_MENU_FAIL'
 export const ADD_SHOP_DISH_NUM_SUCCESS = 'ADD_SHOP_DISH_NUM_SUCCESS'
 export const SUB_SHOP_DISH_NUM_SUCCESS = 'SUB_SHOP_DISH_NUM_SUCCESS'
+
+/*****bills*******************/
+export const ORDER_SUCCESS = 'ORDER_SUCCESS'
+export const ORDER_FAIL = 'ORDER_FAIL'

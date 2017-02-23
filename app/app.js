@@ -9,6 +9,7 @@ const session = require('express-session');
 const index = require('./routes/index');
 const users = require('./routes/users');
 const shops = require('./routes/shops');
+const bills = require('./routes/bills');
 
 const app = express();
 const cors = require('cors');//TODO:跨域操作，上线后删除
@@ -60,6 +61,7 @@ app.use((req, res, next) => {
 app.use('/', index);
 app.use('/users', users);
 app.use('/shops', shops);
+app.use('/bills', bills);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -53,7 +53,10 @@
     ]),
     methods: {
       clearClick(){
-        this.$store.dispatch('clearMenu')
+        this.$store.dispatch('clearMenu', {
+            username: this.$store.state.login.username,
+            shopName: this.shopName
+        })
       }
     },
     mounted(){

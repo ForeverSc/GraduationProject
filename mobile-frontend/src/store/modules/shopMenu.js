@@ -1,4 +1,5 @@
 import shops from '../../api/shops'
+import bills from '../../api/bills'
 import * as types from '../mutations-types'
 import validator from '../../util/validator'
 import { Indicator, MessageBox, Toast } from 'mint-ui'
@@ -43,8 +44,10 @@ const actions = {
   subDishNum({commit}, index){
     commit(types.SUB_SHOP_DISH_NUM_SUCCESS, index)
   },
-  clearMenu({ commit, state, getters}){
+  clearMenu({ commit, state, getters}, { username, shopName }){
     let data = {
+      username,
+      shopName,
       dishs: [],
       total: 0
     }
@@ -71,11 +74,19 @@ const actions = {
     }
 
     MessageBox.confirm(alertTXT).then(()=>{
-
-
-
-
-
+      Indicator.open()
+      bills.order(data).then(response=>{
+        Indicator.close()
+        let res = response.data
+        if(res.errCode === '000000'){
+          commit(types.ORDER_SUCCESS)
+        }else{
+          commit(types.ORDER_FAIL, { errMsg: res.result })
+        }
+      }).catch(err=>{
+        Indicator.close()
+        commit(types.ORDER_FAIL, { errMsg: err })
+      })
     },()=>{})
   }
 };
@@ -96,6 +107,15 @@ const mutations = {
   [types.SUB_SHOP_DISH_NUM_SUCCESS](state, index ){
     if(state.shopMenu[index].dishNum > 0)
       state.shopMenu[index].dishNum --
+  },
+  [types.ORDER_SUCCESS](state){
+    Toast({
+      message: '下单成功！',
+      duration: 800
+    })
+  },
+  [types.ORDER_FAIL](state, { errMsg }){
+    MessageBox.alert(errMsg)
   }
 };
 
