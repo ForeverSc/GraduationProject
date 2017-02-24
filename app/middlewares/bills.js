@@ -30,9 +30,10 @@ exports.order = function (req, res) {
 
 //用户查询订单接口
 exports.getOrderListByUsername = function (req, res) {
-    let username = req.body.username
+    let username = req.body.username,
+        state = req.body.state;
 
-    Bill.findAllBillsByUsername(username, function (err, dbBills) {
+    Bill.findAllBillsByUsername(username, state, function (err, dbBills) {
         if(err){
             return res.send({
                 errCode: '000100',
@@ -51,9 +52,10 @@ exports.getOrderListByUsername = function (req, res) {
 
 //店家查询订单接口
 exports.getOrderListByShopName = function (req, res) {
-    let shopName = req.body.shopName;
+    let shopName = req.body.shopName,
+        state = req.body.state;
 
-    Bill.findAllBillsByShopName(shopName, function (err, dbBills) {
+    Bill.findAllBillsByShopName(shopName, state, function (err, dbBills) {
         if(err){
             return res.send({
                 errCode: '000100',
@@ -69,7 +71,7 @@ exports.getOrderListByShopName = function (req, res) {
     });
 };
 
-//查询订单详情
+//按照ID,查询订单详情
 exports.getOrderInfoById = function (req, res) {
     let _id = req.body.orderId;
 

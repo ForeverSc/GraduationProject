@@ -1,0 +1,10 @@
+import { httpService } from '../util/axios'
+
+export default {
+  getOrderListByShopName(data){
+    return httpService.post('/bills/getOrderListByShopName', data || {})
+  },
+  getOrderInfoById(data){
+    return httpService.post('/bills/getOrderInfoById', data || {})
+  }
+}

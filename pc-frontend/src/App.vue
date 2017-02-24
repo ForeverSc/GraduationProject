@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <el-menu theme="dark" default-active="1" class="el-menu-demo" mode="horizontal" :router="true">
-      <el-menu-item index="1">处理中心</el-menu-item>
+      <el-menu-item index="1" :route="{path: 'home'}">处理中心</el-menu-item>
       <el-submenu index="2">
         <template slot="title">我的工作台</template>
         <el-menu-item index="2-1" :route="{path: 'shopInfo'}">店铺管理</el-menu-item>

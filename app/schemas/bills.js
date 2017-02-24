@@ -21,14 +21,14 @@ const billSchema = new mongoose.Schema({
 });
 
 billSchema.statics = {
-    findAllBillsByUsername(username, cb){
+    findAllBillsByUsername(username, state, cb){
         return this
-            .find({ username })
+            .find({ username, state })
             .exec(cb)
     },
-    findAllBillsByShopName(shopName, cb){
+    findAllBillsByShopName(shopName, state, cb){
         return this
-            .find({ shopName })
+            .find({ shopName, state})
             .exec(cb)
     },
     findBillById(_id, cb){
