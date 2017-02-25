@@ -75,7 +75,7 @@ exports.getOrderListByShopName = function (req, res) {
 exports.getOrderInfoById = function (req, res) {
     let _id = req.body.orderId;
 
-    Bill.findBillById(_id, function (err, dbBills) {
+    Bill.findBillById(_id, function (err, dbBill) {
         if(err){
             return res.send({
                 errCode: '000100',
@@ -84,9 +84,62 @@ exports.getOrderInfoById = function (req, res) {
         }
 
         return res.send({
-            data: dbBills[0],
+            data: dbBill,
             errCode: '000000',
             result: '订单详情查询成功！'
         });
     });
+};
+
+//店家确认接单
+exports.ensureOrder = function (req, res) {
+    let _id = req.body.orderId;
+
+    Bill.findBillById(_id, function (err, dbBill) {
+        if(err){
+            return res.send({
+                errCode: '000100',
+                result: err
+            });
+        }
+
+        dbBill.state = 1; //更改订单状态为 已接单
+        dbBill.save().then(dbBills=>{
+            return res.send({
+                errCode: '000000',
+                result: '接单成功！'
+            });
+        }, err=>{
+            return res.send({
+                errCode: '000100',
+                result: err
+            });
+        });
+    });
+};
+
+//店家取消接单
+exports.cancelOrder = function (req, res) {
+  let _id = req.body.orderId;
+
+  Bill.findBillById(_id, function (err, dbBill) {
+      if(err){
+          return res.send({
+              errCode: '000100',
+              result: err
+          });
+      }
+      dbBill.state = 3; //更改订单状态为 已接单
+      dbBill.save().then(dbBill=>{
+          return res.send({
+              errCode: '000000',
+              result: '取消订单成功！'
+          });
+      }, err=>{
+          return res.send({
+              errCode: '000100',
+              result: err
+          });
+      });
+  });
 };

@@ -3,8 +3,8 @@
     <el-card class="box-card order-card" v-for="order in orderWaitingList">
       <div slot="header" class="clearfix">
         <span style="line-height: 36px;">订单--{{ order._id }}--总计{{order.total}}￥</span>
-        <el-button style="float: right;" type="primary">确认接单</el-button>
-        <el-button style="float: right; margin-right: 20px;">取消</el-button>
+        <el-button style="float: right;" type="primary" @click="ensureOrder(order._id)">确认接单</el-button>
+        <el-button style="float: right; margin-right: 20px;" @click="cancelOrder(order._id)">取消</el-button>
       </div>
       <el-table
         :data="order.dishs"
@@ -29,12 +29,20 @@
   </div>
 </template>
 <script>
-  import {mapGetters} from 'vuex'
+  import { mapGetters } from 'vuex'
   export default {
     name: 'Home',
     computed: mapGetters([
       'orderWaitingList'
     ]),
+    methods: {
+      ensureOrder(orderId){
+        this.$store.dispatch('ensureOrder', { orderId })
+      },
+      cancelOrder(orderId){
+        this.$store.dispatch('cancelOrder', { orderId })
+      }
+    },
     mounted(){
       this.$store.dispatch('getOrderListByShopName', {shopName: this.$store.state.login.shopName, state: 0})
     }

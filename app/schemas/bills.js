@@ -33,7 +33,7 @@ billSchema.statics = {
     },
     findBillById(_id, cb){
         return this
-            .find({ _id })
+            .findOne({ _id })
             .exec(cb)
     }
 };

@@ -305,10 +305,40 @@ response:
 }
 ```
 
+#### 商家确认接单接口
+url: /shops/ensureOrder
+request: 
+
+| 参数           | 类型          | 是否必要  | 说明   |
+| ------------- |:-------------:| -----:  | ----: |
+| orderId       | String       |   是     |订单Id   |
 
 
+response:
+```
+{
+    errCode: '000000',
+    result: '接单成功！'
+}
+```
+
+#### 商家取消订单接口
+
+url: /shops/ensureOrder
+request: 
+
+| 参数           | 类型          | 是否必要  | 说明   |
+| ------------- |:-------------:| -----:  | ----: |
+| orderId       | String       |   是     |订单Id  |
 
 
+response:
+```
+{
+    errCode: '000000',
+    result: '取消订单成功！'
+}
+```
 
 
 
