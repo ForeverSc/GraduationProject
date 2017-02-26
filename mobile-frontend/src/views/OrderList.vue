@@ -1,7 +1,7 @@
 <template>
   <div>
     <cell v-for="order in orderList"
-          :title="order.shopName"
+          :title="order.shopName + '--' + order.stateText"
           :content="'总共'+ order.total + '￥'"
           @cell-click="goOrderInfo(order._id)">
     </cell>
@@ -21,7 +21,7 @@
     },
     methods: {
       goOrderInfo(orderId){
-        this.$router.push({path: '/orderInfo', query: { orderId}})
+        this.$router.push({path: '/orderInfo', query: { orderId }})
       }
     },
     mounted(){

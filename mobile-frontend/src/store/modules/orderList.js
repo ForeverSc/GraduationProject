@@ -1,14 +1,25 @@
 import bills from '../../api/bills'
 import * as types from '../mutations-types'
 import { Indicator, MessageBox, Toast } from 'mint-ui'
-import router from '../../router'
+
 
 const state = {
   orderList: []
 };
 
 const getters = {
-  orderList: state => state.orderList
+  orderList: state => {
+    state.orderList.forEach(function(order, index, array){
+      switch (order.state){
+        case 0 : order.stateText = '待接单'; break;
+        case 1 : order.stateText = '已接单，制作配送中'; break;
+        case 2 : order.stateText = '已完成'; break;
+        case 3 : order.stateText = '未完成'; break;
+        default: break;
+      }
+    });
+    return state.orderList
+  }
 };
 
 const actions = {

@@ -8,7 +8,7 @@
         <img src="" alt="">
         {{ orderInfo.shopName }}
         <div class="order-state">
-          {{ orderInfo.state }}
+          {{ orderInfo.stateText }}
         </div>
       </div>
       <div class="order-info">
@@ -23,8 +23,8 @@
         <mt-cell title="用户" :value="orderInfo.username"></mt-cell>
       </div>
       <div class="order-operation">
-        <mt-button type="primary">确认收货</mt-button>
-        <mt-button type="default" style="margin-left:10px;">取消订单</mt-button>
+        <mt-button type="primary" @click="ensureReceived">确认收货</mt-button>
+        <mt-button type="default" style="margin-left:10px;" @click="cancelOrder">取消订单</mt-button>
       </div>
     </div>
   </div>
@@ -36,28 +36,22 @@
 
   export default {
     name: 'order-info',
-    computed: {
-      ...mapGetters([
+    computed: mapGetters([
         'orderInfo'
       ]),
-      state(){
-          let state = '';
-          switch (orderInfo.state){
-            case 0 : return '待接单'; break;
-            case 1 : return '已接单，制作中'; break;
-            case 2 : return '已完成'; break;
-            case 3 : return '未完成'; break;
-            default: break;
-          }
-      }
-    },
     methods: {
       goBack(){
         this.$router.go(-1)
+      },
+      ensureReceived(){
+          this.$store.dispatch('ensureReceived', { orderId: this.$route.query.orderId });
+      },
+      cancelOrder(){
+        this.$store.dispatch('cancelOrder', { orderId: this.$route.query.orderId });
       }
     },
     mounted(){
-      this.$store.dispatch('getOrderInfoById', {orderId: this.$route.query.orderId})
+      this.$store.dispatch('getOrderInfoById', { orderId: this.$route.query.orderId })
     }
   }
 </script>

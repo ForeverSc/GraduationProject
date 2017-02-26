@@ -30,10 +30,9 @@ exports.order = function (req, res) {
 
 //用户查询订单接口
 exports.getOrderListByUsername = function (req, res) {
-    let username = req.body.username,
-        state = req.body.state;
+    let username = req.body.username;
 
-    Bill.findAllBillsByUsername(username, state, function (err, dbBills) {
+    Bill.findAllBillsByUsername(username, function (err, dbBills) {
         if(err){
             return res.send({
                 errCode: '000100',

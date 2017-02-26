@@ -9,5 +9,12 @@ export default {
   },
   getOrderInfoById(data){
     return httpService.post('/bills/getOrderInfoById', data || {})
+  },
+  ensureReceived(data){
+    return httpService.post('/bills/ensureReceived', data || {})
+  },
+  cancelOrder(data){
+    return httpService.post('/bills/cancelOrder', data || {})
   }
 }
+
