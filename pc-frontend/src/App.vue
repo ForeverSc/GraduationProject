@@ -9,8 +9,8 @@
       </el-submenu>
       <el-submenu index="3">
         <template slot="title">订单管理</template>
-        <el-menu-item index="3-1">进行中的订单</el-menu-item>
-        <el-menu-item index="3-2">历史订单</el-menu-item>
+        <el-menu-item index="3-1" :route="{path: 'orders'}">进行中的订单</el-menu-item>
+        <el-menu-item index="3-2" :route="{path: 'historyOrders'}">历史订单</el-menu-item>
       </el-submenu>
     </el-menu>
     <router-view></router-view>

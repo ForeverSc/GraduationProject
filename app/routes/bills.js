@@ -7,6 +7,7 @@ Bills.post('/order', bills.order)
      .post('/getOrderListByShopName', bills.getOrderListByShopName)
      .post('/getOrderInfoById', bills.getOrderInfoById)
      .post('/ensureOrder', bills.ensureOrder)
-     .post('/cancelOrder', bills.cancelOrder);
+     .post('/cancelOrder', bills.cancelOrder)
+     .post('/ensureReceived', bills.ensureReceived);
 
 module.exports = Bills;

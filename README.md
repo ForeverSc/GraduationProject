@@ -202,6 +202,43 @@ response:
 ```
 
 
+#### 用户确认收货接口
+
+url: /shops/ensureReceived
+request: 
+
+| 参数           | 类型          | 是否必要  | 说明   |
+| ------------- |:-------------:| -----:  | ----: |
+| orderId       | String       |   是     |订单Id  |
+
+
+response:
+```
+{
+    errCode: '000000',
+    result: '确认收货成功'
+}
+
+```
+
+#### 用户取消订单接口
+
+url: /shops/cancelOrder
+request: 
+
+| 参数           | 类型          | 是否必要  | 说明   |
+| ------------- |:-------------:| -----:  | ----: |
+| orderId       | String       |   是     |订单Id  |
+
+
+response:
+```
+{
+    errCode: '000000',
+    result: '取消订单成功！'
+}
+```
+
 
 ### pc （客户端）
 #### 注册接口
@@ -322,9 +359,10 @@ response:
 }
 ```
 
+
 #### 商家取消订单接口
 
-url: /shops/ensureOrder
+url: /shops/cancelOrder
 request: 
 
 | 参数           | 类型          | 是否必要  | 说明   |

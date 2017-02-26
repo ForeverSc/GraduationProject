@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-card class="box-card order-card" v-for="order in orderInProgressList">
+    <el-card class="box-card order-card" v-for="order in historyOrderList">
       <div slot="header" class="clearfix">
         <span style="line-height: 36px;">订单--{{ order._id }}--总计{{order.total}}￥</span>
       </div>
@@ -29,14 +29,14 @@
 <script>
   import { mapGetters } from 'vuex'
   export default {
-    name: 'Orders',
+    name: 'HistoryOrders',
     computed: mapGetters([
-        'orderInProgressList'
+      'historyOrderList'
     ]),
     mounted(){
-      this.$store.dispatch('getOrderInProgressListByShopName', {
-          shopName: this.$store.state.login.shopName,
-          state: 1
+      this.$store.dispatch('getHistoryOrderList', {
+        shopName: this.$store.state.login.shopName,
+        state: 2
       })
     }
   }

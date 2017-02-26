@@ -118,7 +118,7 @@ exports.ensureOrder = function (req, res) {
     });
 };
 
-//店家取消接单
+//用户/店家取消接单
 exports.cancelOrder = function (req, res) {
   let _id = req.body.orderId;
 
@@ -142,4 +142,30 @@ exports.cancelOrder = function (req, res) {
           });
       });
   });
+};
+
+//用户确认收货
+exports.ensureReceived = function (req, res) {
+    let _id = req.body.orderId;
+
+    Bill.findBillById(_id, function (err, dbBill) {
+        if(err){
+            return res.send({
+                errCode: '000100',
+                result: err
+            });
+        }
+        dbBill.state = 2; //更改订单状态为 已完成
+        dbBill.save().then(dbBills=>{
+            return res.send({
+                errCode: '000000',
+                result: '确认收货成功！'
+            });
+        }, err=>{
+            return res.send({
+                errCode: '000100',
+                result: err
+            });
+        });
+    });
 };

@@ -8,6 +8,8 @@ import login from './modules/login'
 import shopInfo from './modules/shopInfo'
 import menu from './modules/menu'
 import home from './modules/home'
+import orders from './modules/orders'
+import historyOrders from './modules/historyOrders'
 
 Vue.use(Vuex);
 
@@ -17,7 +19,9 @@ export default new Vuex.Store({
     login,
     shopInfo,
     menu,
-    home
+    home,
+    orders,
+    historyOrders
   },
   actions,
   mutations
