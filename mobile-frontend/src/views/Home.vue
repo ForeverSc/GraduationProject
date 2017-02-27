@@ -14,12 +14,15 @@
     </mt-tab-container>
     <mt-tabbar style="position: fixed;" v-model="active">
       <mt-tab-item id="tab-takeout">
-        外卖
+        <img slot="icon" src="../assets/home.png">
+        首页
       </mt-tab-item>
       <mt-tab-item id="tab-orders">
+        <img slot="icon" src="../assets/order.png">
         订单
       </mt-tab-item>
       <mt-tab-item id="tab-user">
+        <img slot="icon" src="../assets/user.png">
         我的
       </mt-tab-item>
     </mt-tabbar>
