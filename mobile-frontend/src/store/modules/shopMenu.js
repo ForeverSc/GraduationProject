@@ -6,7 +6,8 @@ import { Indicator, MessageBox, Toast } from 'mint-ui'
 import router from '../../router'
 
 const state = {
-  shopMenu: []
+  shopMenu: [],
+  shopInfo: {}
 };
 
 const getters = {
@@ -17,10 +18,28 @@ const getters = {
       total += cur.dishPrice * cur.dishNum
     })
     return total
-  }
+  },
+  shopInfo: state => state.shopInfo
 };
 
 const actions = {
+  getShopInfo({commit}, data){
+    Indicator.open()
+    shops.getShopInfo(data)
+      .then(response => {
+        Indicator.close()
+        let res = response.data
+        if(res.errCode === '000000'){
+          commit(types.GET_SHOP_INFO_SUCCESS, res.data)
+        }else{
+          commit(types.GET_SHOP_INFO_FAIL, { errMsg: res.result })
+        }
+      })
+      .catch(err => {
+        Indicator.close()
+        commit(types.GET_SHOP_INFO_FAIL, { errMsg: err })
+      })
+  },
   getShopMenu({commit}, data){
     Indicator.open()
     shops.getShopMenu(data)
@@ -115,6 +134,12 @@ const mutations = {
     })
   },
   [types.ORDER_FAIL](state, { errMsg }){
+    MessageBox.alert(errMsg)
+  },
+  [types.GET_SHOP_INFO_SUCCESS](state, shopInfo){
+    state.shopInfo = shopInfo
+  },
+  [types.GET_SHOP_INFO_FAIL](state, { errMsg }){
     MessageBox.alert(errMsg)
   }
 };

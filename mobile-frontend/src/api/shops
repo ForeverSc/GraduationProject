@@ -6,5 +6,8 @@ export default {
   },
   getShopMenu(data){
     return httpService.post('/shops/getShopMenu', data || {})
+  },
+  getShopInfo(data){
+    return httpService.post('/shops/getShopInfo', data || {})
   }
 }

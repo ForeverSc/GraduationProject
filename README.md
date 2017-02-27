@@ -287,6 +287,28 @@ response:
 }
 ```
 
+#### 获取店铺信息接口
+url: /shops/getShopInfo
+request: 
+| 参数           | 类型          | 是否必要  | 说明   |
+| ------------- |:-------------:| -----:  | ----: |
+| shopName      | String       |   是     |店铺名   |
+
+```
+{
+  "data": {
+    "shopName": "fsshop",
+    "shopTel": "12312312312",
+    "shopAddr": "东东东",
+    "shopDetail": "零食小铺子"
+  },
+  "errCode": "000000",
+  "result": "success"
+}
+```
+
+
+
 ####更新店铺信息接口
 url: /shops/updateShopInfo
 request: 

@@ -22,9 +22,9 @@
         <div class="order-user_title">配送信息</div>
         <mt-cell title="用户" :value="orderInfo.username"></mt-cell>
       </div>
-      <div class="order-operation">
-        <mt-button type="primary" @click="ensureReceived">确认收货</mt-button>
-        <mt-button type="default" style="margin-left:10px;" @click="cancelOrder">取消订单</mt-button>
+      <div class="order-operation" >
+        <mt-button type="primary" @click="ensureReceived" v-if="orderInfo.state === 1">确认收货</mt-button>
+        <mt-button type="default" style="margin-left:10px;" @click="cancelOrder" v-if="orderInfo.state === 0">取消订单</mt-button>
       </div>
     </div>
   </div>

@@ -22,7 +22,10 @@
         <!--<mt-cell v-for="n in 4" :title="'测试 ' + n"/>-->
       <!--</mt-tab-container-item>-->
       <mt-tab-container-item id="3">
-
+        <mt-cell title="店铺名" :value="shopInfo.shopName"></mt-cell>
+        <mt-cell title="店铺电话" :value="shopInfo.shopTel"></mt-cell>
+        <mt-cell title="店铺地址" :label="shopInfo.shopAddr"></mt-cell>
+        <mt-cell title="店铺介绍" :label="shopInfo.shopDetail"></mt-cell>
       </mt-tab-container-item>
     </mt-tab-container>
   </div>
@@ -46,7 +49,8 @@
     },
     computed: mapGetters([
       'shopMenu',
-      'total'
+      'total',
+      'shopInfo'
     ]),
     methods: {
       clearClick(){
@@ -61,7 +65,8 @@
     },
     mounted(){
       this.shopName = this.$route.query.shopName
-      this.$store.dispatch('getShopMenu', {shopName: this.shopName})
+      this.$store.dispatch('getShopMenu', { shopName: this.shopName })
+      this.$store.dispatch('getShopInfo', { shopName: this.shopName })
     }
   }
 </script>
