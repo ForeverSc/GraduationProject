@@ -7,6 +7,7 @@
       <div class="cell-title">{{ title }}</div>
       <div class="cell-content">{{ content }}</div>
     </div>
+    <div class="cell-state">{{ state }}</div>
   </div>
 </template>
 <script>
@@ -15,6 +16,7 @@
     props: {
       title: String,
       content: String,
+      state: String,
       imgURL: String,
       imgName: String
     },
@@ -38,7 +40,7 @@
   .cell-img{
     width: 60px;
     height: 60px;
-    margin: 10px;
+    margin-right: 10px;
   }
   .cell-img img{
     width: 60px;
@@ -46,8 +48,10 @@
   }
 
   .cell-info{
+    width: 220px;
     display: flex;
     flex-direction: column;
+    align-items: stretch;
   }
   .cell-title{
     font-size: 18px;
@@ -55,7 +59,12 @@
   .cell-content{
     font-size:10px;
     color: #ccc;
-    margin-top: 10px;
+    margin-top: 15px;
+  }
+
+  .cell-state{
+    display: flex;
+    align-items: center;
   }
 
 

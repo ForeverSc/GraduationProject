@@ -12,7 +12,9 @@ const userSchema = new mongoose.Schema({
         type: String,
         unique: true,
         required: true
-    }
+    },
+    tel: String,
+    address: String
 });
 
 userSchema.methods= {

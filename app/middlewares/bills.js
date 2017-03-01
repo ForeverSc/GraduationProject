@@ -3,6 +3,8 @@ const BillSchema = require('../schemas/bills');
 const Bill = mongoose.model('bill', BillSchema);
 const ShopSchema = require('../schemas/shops');
 const Shop = mongoose.model('shop', ShopSchema);
+const UserSchema = require('../schemas/user');
+const User = mongoose.model('user', UserSchema);
 
 //下单
 exports.order = function (req, res) {
@@ -15,17 +17,26 @@ exports.order = function (req, res) {
     bill.total = body.total;
     bill.state = 0;
 
-    //TODO: 获取用户的地址和电话信息填入到bill对象中
+    User.findOneByUsername(bill.username, function (err, dbUser) {
+        if(err){
+            return res.send({
+                errCode: '000100',
+                result: err
+            });
+        }
+        bill.tel = dbUser.tel;
+        bill.address = dbUser.address;
 
-    bill.save().then(bill => {
-        res.send({
-            errCode: '000000',
-            result: '下单成功！'
-        });
-    }, err => {
-        res.send({
-            errCode: '000100',
-            result: err
+        bill.save().then(bill => {
+            res.send({
+                errCode: '000000',
+                result: '下单成功！'
+            });
+        }, err => {
+            res.send({
+                errCode: '000100',
+                result: err
+            });
         });
     });
 };

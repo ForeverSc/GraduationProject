@@ -2,6 +2,7 @@
   <div>
     <mt-header fixed :title="title"></mt-header>
     <mt-tab-container v-model="active" :swipeable="true" style="margin-top:40px;">
+
       <mt-tab-container-item id="tab-takeout">
         <shop-list></shop-list>
       </mt-tab-container-item>

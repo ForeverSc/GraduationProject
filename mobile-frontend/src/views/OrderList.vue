@@ -2,7 +2,8 @@
   <div>
     <cell class="shop-cell"
           v-for="order in orderList"
-          :title="order.shopName + '--' + order.stateText"
+          :title="order.shopName"
+          :state = "order.stateText"
           :content="'总共'+ order.total + '￥'"
           imgURL=""
           @cell-click="goOrderInfo(order._id)">

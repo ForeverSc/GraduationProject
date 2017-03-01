@@ -21,6 +21,8 @@
       <div class="order-user">
         <div class="order-user_title">配送信息</div>
         <mt-cell title="用户" :value="orderInfo.username"></mt-cell>
+        <mt-cell title="联系电话" :value="orderInfo.tel"></mt-cell>
+        <mt-cell title="收货地址" :value="orderInfo.address"></mt-cell>
       </div>
       <div class="order-operation" >
         <mt-button type="primary" @click="ensureReceived" v-if="orderInfo.state === 1">确认收货</mt-button>

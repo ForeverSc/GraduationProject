@@ -17,7 +17,9 @@ const billSchema = new mongoose.Schema({
     },
     dishs: [ dishSchema ],
     state: Number,// 0：待接单，1：已接单，2：已完成，3：未完成
-    total: String
+    total: String,
+    tel: String,
+    address: String
 });
 
 billSchema.statics = {
