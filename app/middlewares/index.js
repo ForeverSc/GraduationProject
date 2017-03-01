@@ -1,12 +1,14 @@
 const formidable = require('formidable');
-const cacheFolder = 'data';
-const UPLOAD_FOLDER = '/'
+const UPLOAD_FOLDER = 'data/'
 const fs = require('fs')
+const mongoose = require('mongoose');
+const FileSchema = require('../schemas/files');
+const File = mongoose.model('file', FileSchema);
 
 //上传店铺图片
 exports.uploadFile = function (req, res) {
-    const curUser = req.session.user;
-    const userDir = cacheFolder + 'data';
+    const curUser = req.query.name;
+    const userDir = UPLOAD_FOLDER + curUser;
 
     if (!fs.existsSync(userDir)) {
         fs.mkdirSync(userDir);
@@ -21,11 +23,14 @@ exports.uploadFile = function (req, res) {
 
     form.parse(req, function (err, fields, files) {
         if (err) {
-            res.send(err);
-            return;
+            return res.send({
+                errCode: '100200',
+                result: err
+            });
         }
-        var extName = ''; //后缀名
-        switch (files.upload.type) {
+        let extName = ''; //后缀名
+
+        switch (files.file.type) {
             case 'image/pjpeg':
                 extName = 'jpg';
                 break;
@@ -40,19 +45,31 @@ exports.uploadFile = function (req, res) {
                 break;
         }
         if (extName.length === 0) {
-            res.send({
-                code: 202,
-                msg: '只支持png和jpg格式图片'
+            return res.send({
+                errCode: '100202',
+                result: '只支持png和jpg格式图片'
             });
-            return;
         } else {
-            var avatarName = '/' + Date.now() + '.' + extName;
-            var newPath = form.uploadDir + avatarName;
-            displayUrl = UPLOAD_FOLDER + curUser.id + avatarName;
-            fs.renameSync(files.upload.path, newPath); //重命名
-            res.send({
-                code: 200,
-                msg: displayUrl
+            let picName = '/' + Date.now() + '.' + extName;
+            let newPath = form.uploadDir + picName;
+            displayUrl = curUser+ picName;
+            fs.renameSync(files.file.path, newPath); //重命名
+
+            let file = new File();
+            file.name = picName.slice(1);
+            file.url = displayUrl;
+
+            file.save().then(file=>{
+                return res.send({
+                    data: file,
+                    errCode: '000000',
+                    result: '上传成功！'
+                })
+            }, err=>{
+                res.send({
+                    errCode: '000100',
+                    result: err
+                })
             });
         }
     });

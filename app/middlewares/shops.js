@@ -13,6 +13,7 @@ exports.register = function (req, res) {
     shop.shopName = req.body.shopName;
     shop.shopTel = req.body.shopTel;
     shop.shopAddr = req.body.shopAddr;
+    shop.shopDetail = req.body.shopDetail;
     shop.password = req.body.password;
 
     Shop.findOneByShopName(shop.shopName, function (err, dbShop) {
@@ -153,6 +154,7 @@ exports.updateShopInfo = function (req, res) {
     shop.shopTel = req.body.shopTel;
     shop.shopAddr = req.body.shopAddr;
     shop.shopDetail = req.body.shopDetail;
+    shop.shopLogo = req.body.shopLogo[0];
 
     Shop.findOneByShopName(shop.shopName, function (err, dbShop) {
         if (err) {
@@ -172,6 +174,7 @@ exports.updateShopInfo = function (req, res) {
         dbShop.shopTel = shop.shopTel;
         dbShop.shopAddr = shop.shopAddr;
         dbShop.shopDetail = shop.shopDetail;
+        dbShop.shopLogo = shop.shopLogo;
 
         dbShop.save().then(shop => {
             res.send({
@@ -270,7 +273,8 @@ exports.getShopList = function (req, res) {
                 shopName: value.shopName,
                 shopAddr: value.shopAddr,
                 shopTel: value.shopTel,
-                shopDetail: value.shopDetail
+                shopDetail: value.shopDetail,
+                shopLogo: value.shopLogo
             };
            shopList.push(shop);
         });

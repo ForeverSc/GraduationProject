@@ -5,13 +5,15 @@ import { MessageBox, Loading, Message } from 'element-ui'
 const state = {
   shopTel: '',
   shopAddr: '',
-  shopDetail: ''
+  shopDetail: '',
+  shopLogo: []
 };
 
 const getters = {
   shopTel: state => state.shopTel,
   shopAddr: state => state.shopAddr,
-  shopDetail: state => state.shopDetail
+  shopDetail: state => state.shopDetail,
+  shopLogo: state => state.shopLogo
 };
 
 const actions = {
@@ -56,6 +58,7 @@ const mutations = {
     state.shopTel = data.shopTel
     state.shopAddr = data.shopAddr
     state.shopDetail = data.shopDetail
+    state.shopLogo = [data.shopLogo]
   },
   [types.GET_SHOP_INFO_FAIL](state, { errMsg }){
     MessageBox.alert(errMsg)

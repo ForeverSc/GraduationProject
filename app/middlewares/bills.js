@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const BillSchema = require('../schemas/bills');
 const Bill = mongoose.model('bill', BillSchema);
+const ShopSchema = require('../schemas/shops');
+const Shop = mongoose.model('shop', ShopSchema);
 
 //下单
 exports.order = function (req, res) {
@@ -40,8 +42,33 @@ exports.getOrderListByUsername = function (req, res) {
             });
         }
 
+        // let billList = [];
+        //
+        // dbBills.forEach(function (curBill, index, array) {
+        //     let newBill = {
+        //         _id: curBill._id,
+        //         shopName: curBill.shopName,
+        //         state: curBill.state,
+        //         total: curBill.total,
+        //         url:''
+        //     };
+        //
+        //     Shop.findOneByShopName(curBill.shopName, function (err, dbShop) {
+        //        if(err){
+        //            return res.send({
+        //                errCode: '000100',
+        //                result: err
+        //            });
+        //        }
+        //
+        //        newBill.url = dbShop.shopLogo.url;
+        //        billList.push(newBill);
+        //     });
+        // });
+
+
         return res.send({
-            data:dbBills,
+            data: dbBills,
             errCode: '000000',
             result: '订单查询成功！'
         });

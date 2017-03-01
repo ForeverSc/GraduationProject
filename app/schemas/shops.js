@@ -11,7 +11,11 @@ const shopDish = new mongoose.Schema({
         type: String,
         required: true
     },
-    dishDetail: String
+    dishDetail: String,
+    dishLogo:{
+        name: String,
+        url: String
+    }
 });
 
 const shopSchema = new mongoose.Schema({
@@ -28,7 +32,10 @@ const shopSchema = new mongoose.Schema({
         required: true
     },
     shopDetail: String,
-    shopLogo: String,
+    shopLogo: {
+        name: String,
+        url: String
+    },
     password: {
         type: String,
         unique: true,

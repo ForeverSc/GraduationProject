@@ -14,6 +14,9 @@
         <el-form-item label="店铺地址">
           <el-input type="textarea" v-model="shopAddr" placeholder="请输入店铺地址"></el-input>
         </el-form-item>
+        <el-form-item label="店铺介绍">
+          <el-input type="textarea" v-model="shopDetail" placeholder="请输入店铺地址"></el-input>
+        </el-form-item>
         <el-form-item label="密码" prop="pass">
           <el-input type="password" v-model="password" placeholder="请输入密码"></el-input>
         </el-form-item>
@@ -31,6 +34,8 @@
 </template>
 
 <script>
+  import Upload from '../components/upload.vue'
+
   export default {
     name: 'Login',
     data() {
@@ -38,9 +43,13 @@
         shopName: '',
         shopTel: '',
         shopAddr: '',
+        shopDetail: '',
         password: '',
         rePassword: ''
       }
+    },
+    components:{
+      Upload
     },
     methods: {
       submitRegister(){
@@ -48,6 +57,7 @@
               shopName: this.shopName,
               shopTel: this.shopTel,
               shopAddr: this.shopAddr,
+              shopDetail: this.shopDetail,
               password: this.password,
               rePassword: this.rePassword
           })
@@ -56,17 +66,21 @@
           this.shopName = ''
           this.shopTel = ''
           this.shopAddr = ''
+          this.shopDetail = ''
           this.password = ''
           this.rePassword = ''
       },
       handleLogin(){
           this.$router.push('/login')
+      },
+      handleUpload(file){
+          this.$store.dispatch('uploadFile', { file })
       }
     }
   }
 </script>
 
-<style>
+<style scoped>
   .container{
     width: 40%;
     height: 100%;

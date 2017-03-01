@@ -16,16 +16,16 @@
       <el-form-item label="店铺介绍">
         <el-input type="textarea" v-model="shopDetail"></el-input>
       </el-form-item>
-      <!--<el-form-item label="店铺图标">-->
-      <!--<el-upload-->
-      <!--action="//jsonplaceholder.typicode.com/posts/"-->
-      <!--:on-preview="handlePreview"-->
-      <!--:on-remove="handleRemove"-->
-      <!--:default-file-list="fileList">-->
-      <!--<el-button size="small" type="primary">点击上传</el-button>-->
-      <!--<div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>-->
-      <!--</el-upload>-->
-      <!--</el-form-item>-->
+      <el-form-item label="店铺图标">
+        <el-upload
+          :action="'http://localhost:3000/uploadFile?name=' + shopName"
+          :show-upload-list="false"
+          :fileList="shopLogo"
+          :on-success="handleUploadSuccess">
+          <img v-if="imageUrl" :src="imageUrl" style="width: 100px; height: 100px;">
+          <el-button v-if="!imageUrl" size="small" type="primary">点击上传</el-button>
+        </el-upload>
+      </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="handleSave">保存</el-button>
         <el-button @click="handleCancel">取消</el-button>
@@ -35,8 +35,14 @@
 </template>
 <script>
   import {mapGetters} from 'vuex'
+
   export default{
     name: 'ShopInfo',
+    data(){
+      return {
+        imageUrl: ''
+      }
+    },
     computed: {
       ...mapGetters([
          'shopName'
@@ -65,6 +71,14 @@
           this.$store.state.shopInfo.shopDetail = value
         }
       },
+      shopLogo: {
+        get(){
+          return this.$store.state.shopInfo.shopLogo
+        },
+        set(value){
+          this.$store.state.shopInfo.shopLogo = value
+        }
+      }
     },
     methods: {
       handleSave(){
@@ -72,11 +86,19 @@
           shopName: this.$store.state.login.shopName,
           shopTel: this.shopTel,
           shopAddr: this.shopAddr,
-          shopDetail: this.shopDetail
+          shopDetail: this.shopDetail,
+          shopLogo: this.shopLogo
         })
       },
       handleCancel(){
         this.$router.go(-1)
+      },
+      handleUploadSuccess(response, file, fileList){
+        this.shopLogo = [{
+            name: response.data.name,
+            url: response.data.url
+        }]
+        this.imageUrl = 'http://localhost:3000/' + response.data.url;
       }
     },
     mounted(){

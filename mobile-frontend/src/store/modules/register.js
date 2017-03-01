@@ -14,6 +14,14 @@ const actions = {
       MessageBox.alert('用户名不能为空！')
       return
     }
+    if(validator.isEmpty(data.tel)){
+      MessageBox.alert('联系电话不能为空！')
+      return
+    }
+    if(validator.isEmpty(data.address)){
+      MessageBox.alert('收货地址不能为空！')
+      return
+    }
     if(validator.isEmpty(data.password)){
       MessageBox.alert('密码不能为空！')
       return

@@ -1,8 +1,10 @@
 <template>
   <div>
-    <cell v-for="order in orderList"
+    <cell class="shop-cell"
+          v-for="order in orderList"
           :title="order.shopName + '--' + order.stateText"
           :content="'总共'+ order.total + '￥'"
+          imgURL=""
           @cell-click="goOrderInfo(order._id)">
     </cell>
   </div>
@@ -29,3 +31,9 @@
     }
   }
 </script>
+<style>
+  .shop-cell:last-child{
+    margin-bottom: 60px;
+  }
+</style>
+

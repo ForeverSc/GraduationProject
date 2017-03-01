@@ -53,16 +53,14 @@
         <el-form-item label="菜品介绍">
           <el-input type="textarea" v-model="dish.dishDetail"></el-input>
         </el-form-item>
-        <!--<el-form-item label="菜品图标">-->
-        <!--<el-upload-->
-        <!--action="//jsonplaceholder.typicode.com/posts/"-->
-        <!--:on-preview="handlePreview"-->
-        <!--:on-remove="handleRemove"-->
-        <!--:default-file-list="fileList">-->
-        <!--<el-button size="small" type="primary">点击上传</el-button>-->
-        <!--<div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>-->
-        <!--</el-upload>-->
-        <!--</el-form-item>-->
+        <el-form-item label="店铺图标">
+          <el-upload
+            :action="'http://localhost:3000/uploadFile?name=' + shopName"
+            :show-upload-list="false"
+            :on-success="handleUploadSuccess">
+            <img v-if="imageUrl" :src="imageUrl" style="width: 100px; height: 100px;">
+            <el-button v-if="!imageUrl" size="small" type="primary">点击上传</el-button>
+          </el-upload>
         </el-form>
         <span slot="footer" class="dialog-footer">
           <el-button type="primary" @click="saveDish">保存</el-button>
@@ -78,6 +76,7 @@
     name: 'ShopInfo',
     data() {
       return {
+        imageUrl: '',
         dialogVisible: false,
         dialogTitle: '新增菜品',
         dialogOperation: 'add',
@@ -85,11 +84,18 @@
           index: '',
           dishName: '',
           dishPrice: '',
-          dishDetail: ''
+          dishDetail: '',
+          dishLogo: {
+              name: '',
+              url: ''
+          }
         }
       }
     },
     computed: {
+      ...mapGetters([
+         'shopName'
+      ]),
       shopMenu: {
         get(){
           return this.$store.state.menu.shopMenu
@@ -111,13 +117,13 @@
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
-        }).then(() => {
+        }).then(()=>{
           this.shopMenu.splice(index, 1)
           this.$message({
             type: 'success',
             message: '删除成功！'
           });
-        }, () => {})
+        }, ()=>{})
       },
       addNewDish(){
         Object.keys(this.dish).forEach(currentValue => {
@@ -147,6 +153,13 @@
       },
       cancel(){
         this.$router.go(-1)
+      },
+      handleUploadSuccess(response, file, fileList){
+        this.dish.dishLogo = {
+          name: response.data.name,
+          url: response.data.url
+        }
+        this.imageUrl = 'http://localhost:3000/' + response.data.url;
       }
     },
     mounted(){

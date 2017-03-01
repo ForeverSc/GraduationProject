@@ -1,8 +1,11 @@
 <template>
   <div>
-    <cell v-for="shop in shopList"
+    <cell class="shop-cell"
+          v-for="shop in shopList"
           :title="shop.shopName"
           :content="shop.shopDetail"
+          :imgURL="shop.shopLogo && ('http://localhost:3000/' + shop.shopLogo.url)"
+          :imgName="shop.shopLogo && shop.shopLogo.name"
           @cell-click="enterShop">
     </cell>
   </div>
@@ -29,3 +32,8 @@
       }
   }
 </script>
+<style>
+  .shop-cell:last-child{
+    margin-bottom: 60px;
+  }
+</style>

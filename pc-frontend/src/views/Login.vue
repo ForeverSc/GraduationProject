@@ -49,7 +49,7 @@
 <style>
 .container{
   width: 40%;
-  height: 100%;
+  height: 662px;
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -1,7 +1,7 @@
 <template>
   <div class="cell" @click="handleClick">
     <div class="cell-img">
-      <img src="" alt="">
+      <img :src="imgURL" :alt="imgName">
     </div>
     <div class="cell-info">
       <div class="cell-title">{{ title }}</div>
@@ -14,7 +14,9 @@
     name: 'cell',
     props: {
       title: String,
-      content: String
+      content: String,
+      imgURL: String,
+      imgName: String
     },
     methods:{
       handleClick(){
@@ -34,10 +36,15 @@
     border-bottom: 1px solid #dfdfdf;
   }
   .cell-img{
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     margin: 10px;
   }
+  .cell-img img{
+    width: 60px;
+    height: 60px;
+  }
+
   .cell-info{
     display: flex;
     flex-direction: column;

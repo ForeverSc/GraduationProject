@@ -35,7 +35,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'data')));
 app.use(session({
     secret: 'gp',
     resave: false,
@@ -47,16 +47,17 @@ app.use(session({
 }));
 
 //判定session中是否存在用户
-app.use((req, res, next) => {
-   let _user = req.session.user;
-
-   if(_user){
-       app.locals.user = _user;
-   }else{
-       delete app.locals.user;
-   }
-   next();
-});
+// app.use((req, res, next) => {
+//    if(!req.session.user || !req.session.shop){
+//        if(req.url === '/login'){
+//            next()
+//        }else{
+//            res.redirect('/login')
+//        }
+//    }else{
+//        next()
+//    }
+// });
 
 app.use('/', index);
 app.use('/users', users);

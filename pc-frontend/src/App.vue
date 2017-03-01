@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <el-menu theme="dark" default-active="1" class="el-menu-demo" mode="horizontal" :router="true">
+    <el-menu v-if="loginStatus" theme="dark" default-active="1" class="el-menu-demo" mode="horizontal" :router="true">
       <el-menu-item index="1" :route="{path: 'home'}">处理中心</el-menu-item>
       <el-submenu index="2">
         <template slot="title">我的工作台</template>
@@ -37,6 +37,5 @@ export default {
   }
   #app{
     width: 100%;
-    height: 100%;
   }
 </style>

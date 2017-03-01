@@ -1,7 +1,8 @@
 <template>
   <div class="cell">
     <div class="cell-img">
-      <img src="" alt="">
+      <img :src="'http://localhost:3000/' + dish.dishLogo.url"
+           :alt="dish.dishLogo.name">
     </div>
     <div class="cell-info">
       <div class="cell-title">{{ dish.dishName }}</div>
@@ -53,9 +54,14 @@
   }
 
   .cell-img {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     margin: 10px;
+  }
+
+  .cell-img  img{
+    width: 60px;
+    height: 60px;
   }
 
   .cell-info {

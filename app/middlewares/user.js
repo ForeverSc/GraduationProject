@@ -11,6 +11,8 @@ const User = mongoose.model('user', UserSchema);
 exports.register = function (req, res) {
     let user = new User();
     user.username = req.body.username;
+    user.tel = req.body.tel;
+    user.address = req.body.address;
     user.password = req.body.password;
 
     User.findOneByUsername(user.username, function (err, dbUser) {

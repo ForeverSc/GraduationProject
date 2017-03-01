@@ -25,6 +25,8 @@
 
 后端：Node.js(Express4) + MongoDB
 
+注意：在app目录下新建data文件夹，用来存放图片
+
 ## 项目结构
 + app --- 后端   
 + mobile-frontend --- moblie前端
@@ -405,7 +407,7 @@ request:
 
 | 参数           | 类型          | 是否必要  | 说明   |
 | ------------- |:-------------:| -----:  | ----: |
-| file          | form-data     |   是     |选择的文件  |
+| upload        | form-data     |   是     |选择的文件  |
 
 response:
 ```
@@ -417,6 +419,8 @@ response:
     result: '上传成功！'
 }
 ```
+
+
 
 
 
