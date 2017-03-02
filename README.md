@@ -349,7 +349,7 @@ response:
 
 
 ####订单信息查询接口
-url: /shops/getOrderListByShopName
+url: /bills/getOrderListByShopName
 request:   
 
 | 参数           | 类型          | 是否必要  | 说明   |
@@ -366,7 +366,7 @@ response:
 ```
 
 #### 商家确认接单接口
-url: /shops/ensureOrder
+url: /bills/ensureOrder
 request: 
 
 | 参数           | 类型          | 是否必要  | 说明   |
@@ -385,7 +385,7 @@ response:
 
 #### 商家取消订单接口
 
-url: /shops/cancelOrder
+url: /bills/cancelOrder
 request: 
 
 | 参数           | 类型          | 是否必要  | 说明   |

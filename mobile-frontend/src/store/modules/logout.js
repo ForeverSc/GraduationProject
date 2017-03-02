@@ -5,13 +5,9 @@ import { Indicator, MessageBox, Toast } from 'mint-ui'
 import router from '../../router'
 
 const state = {
-  loginStatus: false,
-  username: ''
 };
 
 const getters = {
-  loginStatus: state => state.loginStatus,
-  username: state => state.username
 };
 
 const actions = {
@@ -20,11 +16,11 @@ const actions = {
     users.logout(data)
       .then(response => {
         Indicator.close()
-        let data = response.data
-        if(data.errCode === '000000'){
+        let res = response.data
+        if(res.errCode === '000000'){
           commit(types.LOGOUT_SUCCESS)
         }else{
-          commit(types.LOGOUT_FAIL, { errMsg: data.result })
+          commit(types.LOGOUT_FAIL, { errMsg: res.result })
         }
       })
       .catch(err => {
@@ -35,16 +31,10 @@ const actions = {
 };
 
 const mutations = {
-  [types.LOGIN_SUCCESS](state, { username }){
-    Toast({
-      message: '登录成功！',
-      duration: 800
-    })
-    state.username = ''
-    state.loginStatus = false
+  [types.LOGOUT_SUCCESS](state){
     router.push('/login')
   },
-  [types.LOGIN_FAIL](state, { errMsg }){
+  [types.LOGOUT_FAIL](state, { errMsg }){
     MessageBox.alert(errMsg)
   }
 };

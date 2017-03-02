@@ -5,7 +5,8 @@
           :title="order.shopName"
           :state = "order.stateText"
           :content="'总共'+ order.total + '￥'"
-          imgURL=""
+          :imgURL="order.billLogo && ('http://localhost:3000/' + order.billLogo.url)"
+          :imgName="order.billLogo && order.billLogo.name"
           @cell-click="goOrderInfo(order._id)">
     </cell>
   </div>

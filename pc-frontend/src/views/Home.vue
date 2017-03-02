@@ -2,7 +2,7 @@
   <div>
     <el-card class="box-card order-card" v-for="order in orderWaitingList">
       <div slot="header" class="clearfix">
-        <span style="line-height: 36px;">订单--{{ order._id }}--总计{{order.total}}￥</span>
+        <span style="line-height: 36px;">订单{{ order._id }}</span>
         <el-button style="float: right;" type="primary" @click="ensureOrder(order._id)">确认接单</el-button>
         <el-button style="float: right; margin-right: 20px;" @click="cancelOrder(order._id)">取消</el-button>
       </div>
@@ -25,6 +25,13 @@
           label="数目">
         </el-table-column>
       </el-table>
+      <div class="userInfo">
+        <div class="header">配送信息</div>
+        <div>用户名：{{order.username}}</div>
+        <div>联系电话：{{order.tel}}</div>
+        <div>收货地址：{{order.address}}</div>
+        <div>总计：{{order.total}}￥</div>
+      </div>
     </el-card>
   </div>
 </template>

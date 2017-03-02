@@ -19,7 +19,11 @@ const billSchema = new mongoose.Schema({
     state: Number,// 0：待接单，1：已接单，2：已完成，3：未完成
     total: String,
     tel: String,
-    address: String
+    address: String,
+    billLogo: {
+        name: String,
+        url:  String
+    }
 });
 
 billSchema.statics = {

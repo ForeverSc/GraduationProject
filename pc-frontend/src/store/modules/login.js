@@ -40,6 +40,23 @@ const actions = {
         loading.close()
         commit(types.LOGIN_FAIL, { errMsg: err })
       })
+  },
+  logout({commit}, data){
+    let loading = Loading.service()
+    shops.logout(data)
+      .then(response => {
+        loading.close()
+        let res = response.data
+        if(res.errCode === '000000'){
+          commit(types.LOGOUT_SUCCESS)
+        }else{
+          commit(types.LOGOUT_FAIL, { errMsg: res.result })
+        }
+      })
+      .catch(err => {
+        loading.close()
+        commit(types.LOGOUT_FAIL, { errMsg: err })
+      })
   }
 };
 
@@ -55,6 +72,19 @@ const mutations = {
     router.push('/home')
   },
   [types.LOGIN_FAIL](state, { errMsg }){
+    MessageBox.alert(errMsg)
+  },
+  [types.LOGOUT_SUCCESS](state){
+    Message({
+      message: '登出成功！',
+      type: 'success',
+      duration: 8000
+    })
+    state.shopName = ''
+    state.loginStatus = false
+    router.push('/login')
+  },
+  [types.LOGOUT_FAIL](state, { errMsg }){
     MessageBox.alert(errMsg)
   }
 };

@@ -17,28 +17,42 @@ exports.order = function (req, res) {
     bill.total = body.total;
     bill.state = 0;
 
-    User.findOneByUsername(bill.username, function (err, dbUser) {
+    Shop.findOneByShopName(bill.shopName, function (err, dbShop) {
         if(err){
             return res.send({
                 errCode: '000100',
                 result: err
             });
         }
-        bill.tel = dbUser.tel;
-        bill.address = dbUser.address;
 
-        bill.save().then(bill => {
-            res.send({
-                errCode: '000000',
-                result: '下单成功！'
-            });
-        }, err => {
-            res.send({
-                errCode: '000100',
-                result: err
+        bill.billLogo = dbShop.shopLogo;
+
+        User.findOneByUsername(bill.username, function (err, dbUser) {
+            if(err){
+                return res.send({
+                    errCode: '000100',
+                    result: err
+                });
+            }
+            bill.tel = dbUser.tel;
+            bill.address = dbUser.address;
+
+            bill.save().then(bill => {
+                res.send({
+                    errCode: '000000',
+                    result: '下单成功！'
+                });
+            }, err => {
+                res.send({
+                    errCode: '000100',
+                    result: err
+                });
             });
         });
-    });
+
+    })
+
+
 };
 
 //用户查询订单接口
@@ -52,31 +66,6 @@ exports.getOrderListByUsername = function (req, res) {
                 result: err
             });
         }
-
-        // let billList = [];
-        //
-        // dbBills.forEach(function (curBill, index, array) {
-        //     let newBill = {
-        //         _id: curBill._id,
-        //         shopName: curBill.shopName,
-        //         state: curBill.state,
-        //         total: curBill.total,
-        //         url:''
-        //     };
-        //
-        //     Shop.findOneByShopName(curBill.shopName, function (err, dbShop) {
-        //        if(err){
-        //            return res.send({
-        //                errCode: '000100',
-        //                result: err
-        //            });
-        //        }
-        //
-        //        newBill.url = dbShop.shopLogo.url;
-        //        billList.push(newBill);
-        //     });
-        // });
-
 
         return res.send({
             data: dbBills,
@@ -141,8 +130,9 @@ exports.ensureOrder = function (req, res) {
         }
 
         dbBill.state = 1; //更改订单状态为 已接单
-        dbBill.save().then(dbBills=>{
+        dbBill.save().then(dbBill=>{
             return res.send({
+                data: { orderId: dbBill._id },
                 errCode: '000000',
                 result: '接单成功！'
             });
@@ -169,6 +159,7 @@ exports.cancelOrder = function (req, res) {
       dbBill.state = 3; //更改订单状态为 已接单
       dbBill.save().then(dbBill=>{
           return res.send({
+              data: { orderId: dbBill._id },
               errCode: '000000',
               result: '取消订单成功！'
           });
