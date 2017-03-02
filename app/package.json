@@ -19,6 +19,7 @@
     "kerberos": "0.0.17",
     "mongoose": "^4.2.5",
     "morgan": "~1.7.0",
-    "serve-favicon": "~2.3.2"
+    "serve-favicon": "~2.3.2",
+    "socket.io": "^1.7.3"
   }
 }

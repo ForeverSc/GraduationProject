@@ -1,7 +1,7 @@
 <template>
   <div class="cell">
     <div class="cell-img">
-      <img :src="'http://localhost:3000/' + dish.dishLogo.url"
+      <img :src="baseURL + '/' + dish.dishLogo.url"
            :alt="dish.dishLogo.name">
     </div>
     <div class="cell-info">
@@ -18,12 +18,18 @@
 </template>
 <script>
   import {mapGetters} from 'vuex'
+  import { baseURL } from '../util/axios'
 
   export default {
     name: 'dish-cell',
     props: {
       dish: Object,
       index: Number
+    },
+    data(){
+      return {
+          baseURL
+      }
     },
     computed: {
       ...mapGetters([

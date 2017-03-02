@@ -5,7 +5,7 @@
           :title="order.shopName"
           :state = "order.stateText"
           :content="'总共'+ order.total + '￥'"
-          :imgURL="order.billLogo && ('http://localhost:3000/' + order.billLogo.url)"
+          :imgURL="order.billLogo && (baseURL + '/' + order.billLogo.url)"
           :imgName="order.billLogo && order.billLogo.name"
           @cell-click="goOrderInfo(order._id)">
     </cell>
@@ -14,9 +14,15 @@
 <script>
   import {mapGetters} from 'vuex'
   import Cell from '../components/Cell'
+  import { baseURL } from '../util/axios'
 
   export default{
     name: 'order-list',
+    data(){
+      return {
+        baseURL
+      }
+    },
     computed: mapGetters([
       'orderList'
     ]),

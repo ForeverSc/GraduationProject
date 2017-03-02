@@ -5,7 +5,6 @@ import Register from '../views/Register'
 import Home from '../views/Home'
 import ShopInfo from '../views/ShopInfo'
 import Menu from '../views/Menu'
-import EditDish from '../views/EditDish'
 import Orders from '../views/Orders'
 import historyOrders from '../views/historyOrders'
 
@@ -32,10 +31,6 @@ export default new VueRouter({
     {
       path: '/menu',
       component: Menu
-    },
-    {
-      path: '/editDish',
-      component: EditDish
     },
     {
       path: '/orders',

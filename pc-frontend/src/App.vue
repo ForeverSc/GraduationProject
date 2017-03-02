@@ -30,6 +30,19 @@ export default {
     handleLogout(){
         this.$store.dispatch('logout')
     }
+  },
+  sockets:{
+    connect(){
+      console.log('socket connected')
+    },
+    newOrder(msg){
+      this.$notify({
+         title: '提示',
+         message: '你有一份新订单！请前往处理中心查看详情。',
+         duration: 0
+      });
+      this.$store.dispatch('getOrderListByShopName', {shopName: this.$store.state.login.shopName, state: 0})
+    }
   }
 }
 </script>

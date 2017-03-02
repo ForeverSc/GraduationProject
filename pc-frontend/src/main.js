@@ -7,9 +7,11 @@ import 'element-ui/lib/theme-default/index.css'
 import App from './App'
 import router from './router'
 import store from './store'
+import VueSocketio from 'vue-socket.io';
 
 Vue.use(VueRouter)
 Vue.use(ElementUI)
+Vue.use(VueSocketio, 'http://localhost:3000');
 
 /* eslint-disable no-new */
 new Vue({

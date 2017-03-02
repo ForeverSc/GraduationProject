@@ -53,13 +53,13 @@
         <el-form-item label="菜品介绍">
           <el-input type="textarea" v-model="dish.dishDetail"></el-input>
         </el-form-item>
-        <el-form-item label="店铺图标">
+        <el-form-item label="菜品图标">
           <el-upload
-            :action="'http://localhost:3000/uploadFile?name=' + shopName"
+            :action="baseURL + '/uploadFile?name=' + shopName"
             :show-upload-list="false"
             :on-success="handleUploadSuccess">
-            <img v-if="imageUrl" :src="imageUrl" style="width: 100px; height: 100px;">
-            <el-button v-if="!imageUrl" size="small" type="primary">点击上传</el-button>
+            <img v-if="dish.dishLogo.url" :src="dish.dishLogo.url" style="width: 100px; height: 100px;">
+            <el-button v-if="!dish.dishLogo.url" size="small" type="primary">点击上传</el-button>
           </el-upload>
         </el-form>
         <span slot="footer" class="dialog-footer">
@@ -72,11 +72,12 @@
 <script>
   import { mapGetters } from 'vuex'
   import Util from '../util/index'
+  import { baseURL } from '../util/axios'
   export default{
     name: 'ShopInfo',
     data() {
       return {
-        imageUrl: '',
+        baseURL,
         dialogVisible: false,
         dialogTitle: '新增菜品',
         dialogOperation: 'add',
@@ -159,7 +160,7 @@
           name: response.data.name,
           url: response.data.url
         }
-        this.imageUrl = 'http://localhost:3000/' + response.data.url;
+        this.dish.imageUrl = 'http://localhost:3000/' + response.data.url;
       }
     },
     mounted(){

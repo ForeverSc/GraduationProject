@@ -18,12 +18,12 @@
       </el-form-item>
       <el-form-item label="店铺图标">
         <el-upload
-          :action="'http://localhost:3000/uploadFile?name=' + shopName"
+          :action="baseURL + '/uploadFile?name=' + shopName"
           :show-upload-list="false"
           :fileList="shopLogo"
           :on-success="handleUploadSuccess">
-          <img v-if="imageUrl" :src="imageUrl" style="width: 100px; height: 100px;">
-          <el-button v-if="!imageUrl" size="small" type="primary">点击上传</el-button>
+          <img v-if="shopLogo.url" :src="shopLogo.url" style="width: 100px; height: 100px;">
+          <el-button v-if="!shopLogo.url" size="small" type="primary">点击上传</el-button>
         </el-upload>
       </el-form-item>
       <el-form-item>
@@ -35,12 +35,13 @@
 </template>
 <script>
   import {mapGetters} from 'vuex'
+  import { baseURL } from '../util/axios'
 
   export default{
     name: 'ShopInfo',
     data(){
       return {
-        imageUrl: ''
+        baseURL
       }
     },
     computed: {
@@ -98,7 +99,6 @@
             name: response.data.name,
             url: response.data.url
         }]
-        this.imageUrl = 'http://localhost:3000/' + response.data.url;
       }
     },
     mounted(){
