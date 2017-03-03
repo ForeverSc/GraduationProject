@@ -25,7 +25,6 @@
 
 后端：Node.js(Express4) + MongoDB
 
-注意：在app目录下新建data文件夹，用来存放图片
 
 ## 项目结构
 + app --- 后端   

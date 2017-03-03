@@ -22,7 +22,7 @@
           :show-upload-list="false"
           :fileList="shopLogo"
           :on-success="handleUploadSuccess">
-          <img v-if="shopLogo.url" :src="shopLogo.url" style="width: 100px; height: 100px;">
+          <img v-show="shopLogo.url" :src="shopLogo.url" style="width: 100px; height: 100px;">
           <el-button v-if="!shopLogo.url" size="small" type="primary">点击上传</el-button>
         </el-upload>
       </el-form-item>
@@ -95,10 +95,10 @@
         this.$router.go(-1)
       },
       handleUploadSuccess(response, file, fileList){
-        this.shopLogo = [{
+        this.shopLogo = {
             name: response.data.name,
             url: response.data.url
-        }]
+        }
       }
     },
     mounted(){

@@ -154,7 +154,7 @@ exports.updateShopInfo = function (req, res) {
     shop.shopTel = req.body.shopTel;
     shop.shopAddr = req.body.shopAddr;
     shop.shopDetail = req.body.shopDetail;
-    shop.shopLogo = req.body.shopLogo[0];
+    shop.shopLogo = req.body.shopLogo;
 
     Shop.findOneByShopName(shop.shopName, function (err, dbShop) {
         if (err) {

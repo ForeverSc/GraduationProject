@@ -1,5 +1,5 @@
 const formidable = require('formidable');
-const UPLOAD_FOLDER = 'data/'
+const UPLOAD_FOLDER = 'public/'
 const fs = require('fs')
 const mongoose = require('mongoose');
 const FileSchema = require('../schemas/files');

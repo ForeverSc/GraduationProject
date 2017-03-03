@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export const baseURL = 'http://localhost:3000';
+export const baseURL = 'http://fengshuochn.com';
 
 //通用类http-service
 export const httpService = axios.create({
