@@ -100,5 +100,20 @@
     margin-right: 10px;
   }
 
+  .sub,.add{
+    line-height: 30px;
+    width: 30px;
+    height: 30px;
+    font-size:25px;
+    text-align: center;
+  }
+  .num{
+    font-size: 18px;
+    line-height: 30px;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+  }
+
 
 </style>
