@@ -10,6 +10,7 @@ import shopList from './modules/shopList'
 import shopMenu from './modules/shopMenu'
 import orderList from './modules/orderList'
 import orderInfo from './modules/orderInfo'
+import userInfo from './modules/userInfo'
 
 Vue.use(Vuex);
 
@@ -21,7 +22,8 @@ export default new Vuex.Store({
     shopList,
     shopMenu,
     orderList,
-    orderInfo
+    orderInfo,
+    userInfo
   },
   actions,
   mutations

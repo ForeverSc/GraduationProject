@@ -5,6 +5,7 @@ import Register from '../views/Register'
 import Home from '../views/Home'
 import ShopMenu from '../views/ShopMenu.vue'
 import OrderInfo from '../views/OrderInfo.vue'
+import SetUserInfo from '../views/SetUserInfo.vue'
 
 export default new VueRouter({
   mode: 'history',
@@ -29,6 +30,10 @@ export default new VueRouter({
     {
       path: '/orderInfo',
       component: OrderInfo
+    },
+    {
+      path: '/setUserInfo',
+      component: SetUserInfo
     },
     {
       path: '*',

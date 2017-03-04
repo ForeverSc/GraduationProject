@@ -2,7 +2,6 @@ import bills from '../../api/bills'
 import * as types from '../mutations-types'
 import { Indicator, MessageBox, Toast } from 'mint-ui'
 
-
 const state = {
   orderList: []
 };

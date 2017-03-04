@@ -1,5 +1,6 @@
 <template>
   <div>
+    <mt-loadmore :top-method="loadTop" ref="loadmore">
     <cell class="shop-cell"
           v-for="order in orderList"
           :title="order.shopName"
@@ -9,6 +10,7 @@
           :imgName="order.billLogo && order.billLogo.name"
           @cell-click="goOrderInfo(order._id)">
     </cell>
+    </mt-loadmore>
   </div>
 </template>
 <script>
@@ -32,6 +34,10 @@
     methods: {
       goOrderInfo(orderId){
         this.$router.push({path: '/orderInfo', query: { orderId }})
+      },
+      loadTop(){
+        this.$store.dispatch('getOrderListByUsername', {username: this.$store.state.login.username})
+        this.$refs.loadmore.onTopLoaded();
       }
     },
     mounted(){

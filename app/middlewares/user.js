@@ -108,3 +108,52 @@ exports.logout = function (req, res) {
         result: '登出成功！'
     });
 };
+
+exports.getUserInfo = function (req, res) {
+    let username = req.body.username;
+
+    User.findOneByUsername(username, function (err, dbUser) {
+        if(err){
+            return res.send({
+                errCode: '000100',
+                result: err
+            });
+        }
+        return res.send({
+            data: dbUser,
+            errCode: '000000',
+            result: '获取用户信息成功！'
+        });
+    });
+};
+
+exports.updateUserInfo = function (req, res) {
+    let username = req.body.username,
+        tel = req.body.tel,
+        address = req.body.address;
+
+
+    User.findOneByUsername(username, function (err, dbUser) {
+        if(err){
+            return res.send({
+                errCode: '000100',
+                result: err
+            });
+        }
+
+        dbUser.tel = tel;
+        dbUser.address = address;
+        dbUser.save().then(user=>{
+            return res.send({
+                errCode: '000000',
+                result: '更新成功！'
+            });
+        }, err=>{
+            return res.send({
+                errCode: '000100',
+                result: err
+            });
+        });
+    });
+
+};

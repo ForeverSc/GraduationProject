@@ -9,5 +9,11 @@ export default {
   },
   logout(data){
     return httpService.post('/users/logout', data || {})
+  },
+  getUserInfo(data){
+    return httpService.post('/users/getUserInfo', data || {})
+  },
+  updateUserInfo(data){
+    return httpService.post('/users/updateUserInfo', data || {})
   }
 }

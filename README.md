@@ -34,7 +34,7 @@
 ## APIS
 ### mobile（用户端）
 #### 注册接口
-url: /shops/register
+url: /users/register
 request:
 
 | 参数           | 类型          | 是否必要  | 说明   |
@@ -51,7 +51,7 @@ response:
 ```
 
 #### 登录接口
-url: /shops/login
+url: /users/login
 request:
 
 | 参数           | 类型          | 是否必要  | 说明   |
@@ -68,7 +68,7 @@ response:
 ```
 
 #### 登出接口
-url: /shops/logout
+url: /users/logout
 request: {}
 response: 
 ```
@@ -77,6 +77,45 @@ response:
     errorCode: '000000'
 }
 ```
+
+
+#### 获取用户信息
+url: /users/getUserInfo
+request: 
+
+| 参数           | 类型          | 是否必要  | 说明   |
+| ------------- |:-------------:| -----:  | ----: |
+| username       | String       |   是    | 用户名  |
+
+
+response:
+```
+{
+    errCode: '000000',
+    result: '获取用户信息成功！'
+}
+```
+
+#### 更新用户信息
+url: /users/updateUserInfo
+request: 
+
+| 参数           | 类型          | 是否必要  | 说明   |
+| ------------- |:-------------:| -----:  | ----: |
+| username       | String       |   是    | 用户名  |
+| tel            | String       |   是    | 电话   |
+| address        | String       |   是    | 地址  |
+
+response:
+```
+{
+    errCode: '000000',
+    result: '更新用户信息成功！'
+}
+```
+
+
+
 ####店铺列表接口
 url: /shops/getShopList
 requeset: null
@@ -204,7 +243,7 @@ response:
 
 #### 用户确认收货接口
 
-url: /shops/ensureReceived
+url: /bills/ensureReceived
 request: 
 
 | 参数           | 类型          | 是否必要  | 说明   |
@@ -223,7 +262,7 @@ response:
 
 #### 用户取消订单接口
 
-url: /shops/cancelOrder
+url: /bills/cancelOrder
 request: 
 
 | 参数           | 类型          | 是否必要  | 说明   |
@@ -238,6 +277,8 @@ response:
     result: '取消订单成功！'
 }
 ```
+
+
 
 
 ### pc （客户端）

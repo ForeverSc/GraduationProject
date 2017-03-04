@@ -2,12 +2,11 @@
   <div>
     <mt-cell
       title="用户名"
-      to="/"
       :value="username">
     </mt-cell>
     <mt-cell
       title="修改信息"
-      to="/"
+      to="/setUserInfo"
       is-link>
     </mt-cell>
     <!--<mt-cell-->
